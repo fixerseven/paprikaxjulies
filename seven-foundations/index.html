@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Foundations — Paprika × Julie's Bakeshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+/* =================================================================
+   JULIE'S BAKESHOP — Brand identity (Brand Book pp.44-49)
+   Full-bleed foundations deck — every slide is a full-screen image.
+   ================================================================= */
+:root{
+  --red:#FF0000;
+  --deep:#4E3622;
+  --deepred:#AF1F24;
+  --yellow:#FFE400;
+  --orange:#F9992F;
+  --beige:#FFE3C5;
+  --blue:#9DBCFF;       /* heritage blue, lightened for on-image use */
+  --blueDeep:#1B3F8F;   /* heritage blue — placeholder until 2021 source values arrive */
+  --ink:#222223;
+  --disp:'Poppins',system-ui,sans-serif;
+  --body:'Varela Round','Poppins',system-ui,sans-serif;
+  --mono:'Poppins',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;width:100%;overflow:hidden;background:#160b05;font-family:var(--body);color:#fff;-webkit-font-smoothing:antialiased}
+.deck{height:100vh;width:100vw;position:relative}
+
+/* film grain */
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---- slides: every one full-bleed ---- */
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;overflow:hidden;
+  transition:opacity .8s ease;}
+.slide.active{opacity:1;visibility:visible;z-index:2}
+
+/* full-screen image layer */
+.bg{position:absolute;inset:0;z-index:0}
+.bg img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05)}
+.active .bg img{animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.05)}to{transform:scale(1.16)}}
+/* scrim — heavy left, soft right, grounded bottom */
+.bg .grad{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(95deg, rgba(22,11,5,.92) 0%, rgba(22,11,5,.78) 42%, rgba(22,11,5,.45) 75%, rgba(22,11,5,.28) 100%),
+             linear-gradient(0deg, rgba(22,11,5,.62) 0%, transparent 34%)}
+
+/* archival photo caption */
+.cap{position:absolute;right:clamp(18px,2vw,34px);bottom:clamp(16px,2vh,26px);z-index:4;
+  font-family:var(--mono);font-weight:500;font-size:clamp(9px,.9vw,11.5px);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+/* F7 — designed background: bread on deep red, no photo */
+#f7 .bg{background:radial-gradient(95% 95% at 72% 42%, rgba(255,228,0,.16), transparent 62%) var(--deepred)}
+#f7 .bg img{position:absolute;left:auto;right:3vw;top:50%;width:auto;height:min(60vh,46vw);object-fit:contain;
+  transform:translateY(-50%) rotate(-8deg);filter:drop-shadow(0 34px 70px rgba(0,0,0,.5))}
+#f7.active .bg img{animation:breadfloat 7s ease-in-out infinite alternate}
+@keyframes breadfloat{from{transform:translateY(-52%) rotate(-8deg)}to{transform:translateY(-48%) rotate(-5deg)}}
+#f7 .bg .grad{background:linear-gradient(95deg, rgba(22,11,5,.55) 0%, rgba(22,11,5,.25) 45%, transparent 75%),
+  linear-gradient(0deg, rgba(22,11,5,.5) 0%, transparent 30%)}
+
+/* F1 — retro logo test card (pinned exploration, WIP) */
+#f1 .test{position:absolute;right:clamp(20px,5.5vw,84px);top:50%;transform:translateY(-50%) rotate(3deg);z-index:3;width:clamp(220px,26vw,440px)}
+#f1 .test .tframe{background:#fff;padding:clamp(8px,.8vw,14px) ;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+#f1 .test img{width:100%;display:block;border-radius:8px}
+#f1 .test .ttag{margin-top:1em;display:inline-block;font-family:var(--mono);font-weight:600;font-size:clamp(9px,.9vw,12px);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--blue);border:1.5px dashed var(--blue);border-radius:30px;padding:.5em 1.1em;background:rgba(22,11,5,.5)}
+
+/* F2 — Tita Julie illustration on warm brand brown */
+#f2 .bg{background:radial-gradient(95% 95% at 72% 42%, rgba(255,228,0,.20), transparent 62%) var(--deep)}
+#f2 .bg img{position:absolute;left:auto;right:clamp(24px,7vw,120px);top:auto;bottom:0;width:auto;height:min(82vh,58vw);
+  object-fit:contain;transform:none;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+#f2.active .bg img{animation:tjrise 1.1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes tjrise{from{transform:translateY(36px);opacity:0}to{transform:translateY(0);opacity:1}}
+#f2 .bg .grad{background:linear-gradient(95deg, rgba(22,11,5,.6) 0%, rgba(22,11,5,.28) 48%, transparent 78%),
+  linear-gradient(0deg, rgba(22,11,5,.4) 0%, transparent 26%)}
+
+/* F7 — slogan candidates (pitched today, WIP) */
+#f7 .lines{margin-top:min(2vh,18px);display:flex;flex-direction:column;gap:min(1.5vh,13px);max-width:46ch}
+#f7 .line{display:flex;gap:.9em;align-items:baseline}
+#f7 .line .li{font-family:var(--mono);font-weight:600;font-size:clamp(10px,1vw,13px);color:var(--orange)}
+#f7 .line .lt{font-family:var(--disp);font-weight:700;font-size:min(clamp(16px,1.9vw,27px),3.5vh);color:#fff;line-height:1.12;text-shadow:0 1px 16px rgba(0,0,0,.4)}
+#f7 .line .lg{display:block;font-family:var(--body);font-weight:400;font-size:min(clamp(11px,1vw,14px),2.2vh);color:#F4C9B6;margin-top:.15em}
+#f7 .wip{display:inline-block;align-self:flex-start;margin-top:min(1.8vh,15px);font-family:var(--mono);font-weight:600;font-size:clamp(9px,.9vw,12px);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);border:1.5px dashed var(--yellow);border-radius:30px;padding:.5em 1.1em;transform:rotate(-2deg)}
+
+/* giant watermark number */
+.wm{position:absolute;right:-1vw;bottom:-6vh;z-index:1;font-family:var(--disp);font-weight:900;
+  font-size:min(34vw,52vh);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.14);pointer-events:none;user-select:none}
+.fblue .wm{-webkit-text-stroke:2px rgba(157,188,255,.22)}
+
+/* copy column */
+.col{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(28px,5vh,64px) clamp(40px,7vw,110px);max-width:78ch}
+.eye{font-family:var(--mono);font-weight:600;font-size:clamp(10px,1vw,13px);letter-spacing:.3em;text-transform:uppercase;color:var(--yellow);display:flex;align-items:center;gap:.7em}
+.eye::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--yellow);display:inline-block}
+.fblue .eye{color:var(--blue)}.fblue .eye::before{background:var(--blue)}
+h1{font-family:var(--disp);font-weight:800;line-height:1.0;letter-spacing:-.02em;color:#fff;
+  font-size:min(clamp(36px,5.6vw,84px),11vh);margin-top:min(1.6vh,14px);text-shadow:0 2px 30px rgba(0,0,0,.45)}
+h1 em{font-style:normal;color:var(--yellow)}
+.fblue h1 em{color:var(--blue)}
+.decision{font-family:var(--disp);font-weight:400;color:#FFF1E0;font-size:min(clamp(16px,1.9vw,27px),3.6vh);
+  line-height:1.35;max-width:46ch;margin-top:min(2.4vh,20px);text-shadow:0 1px 18px rgba(0,0,0,.5)}
+.decision b{color:var(--yellow);font-weight:600}
+.fblue .decision b{color:var(--blue)}
+.why{color:#EAD8C4;font-size:min(clamp(13px,1.3vw,18px),2.7vh);line-height:1.45;max-width:52ch;margin-top:min(2vh,16px);text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.means{display:flex;align-items:flex-start;gap:.8em;margin-top:min(2.6vh,22px);max-width:52ch}
+.means .tick{flex:0 0 auto;width:1.5em;height:1.5em;border-radius:50%;border:2px solid var(--yellow);display:flex;align-items:center;justify-content:center;margin-top:.1em}
+.means .tick svg{width:60%;height:60%}
+.fblue .means .tick{border-color:var(--blue)}
+.means .mt{font-size:min(clamp(12px,1.2vw,16px),2.5vh);line-height:1.4;color:#F4E4D2;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.means .mt b{display:block;font-family:var(--mono);font-weight:600;font-size:.72em;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:.35em}
+.fblue .means .mt b{color:var(--blue)}
+
+/* reveal */
+.r{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+.active .r{opacity:1;transform:none;transition-delay:var(--d,0s)}
+
+/* ---- cover ---- */
+#c .col{max-width:none}
+#c .lockup{display:inline-flex;align-items:center;gap:clamp(12px,1.6vw,26px);background:#fff;border-radius:16px;
+  padding:clamp(12px,1.6vw,22px) clamp(18px,2.4vw,36px);box-shadow:0 24px 60px rgba(0,0,0,.45);align-self:flex-start}
+#c .lockup img{height:clamp(26px,3.2vw,44px);width:auto;object-fit:contain}
+#c .lockup .julies{height:clamp(46px,6vw,84px)}
+#c .lockup .cx{font-family:var(--disp);font-weight:300;font-style:italic;color:var(--orange);font-size:clamp(20px,2.6vw,40px)}
+#c .lockup .txt{font-family:var(--disp);font-weight:800;color:var(--deep);font-size:clamp(22px,3vw,42px)}
+#c h1{font-size:min(clamp(52px,9.5vw,140px),17vh);margin-top:3vh}
+#c .sub{font-family:var(--disp);font-weight:400;color:#FFF1E0;font-size:min(clamp(16px,2.2vw,32px),4vh);max-width:30ch;line-height:1.3;margin-top:2vh;text-shadow:0 1px 20px rgba(0,0,0,.5)}
+#c .foot{font-family:var(--mono);font-weight:500;color:#F4C9B6;font-size:clamp(10px,1vw,13px);letter-spacing:.18em;text-transform:uppercase;margin-top:4.5vh}
+
+/* ---- bridge slide (F5): full-width persona triptych ---- */
+#f5 .tri{position:absolute;inset:0;z-index:0;display:flex}
+#f5 .tri .p{position:relative;flex:1;overflow:hidden}
+#f5 .tri .p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
+#f5.active .tri .p img{animation:kb 9s ease-out forwards}
+#f5 .tri .p .shade{position:absolute;inset:0;background:linear-gradient(0deg, rgba(22,11,5,.94) 0%, rgba(22,11,5,.55) 40%, rgba(22,11,5,.22) 75%, rgba(22,11,5,.35) 100%)}
+#f5 .tri .p.joy{box-shadow:inset 0 -8px 0 var(--yellow)}
+#f5 .pname{position:absolute;bottom:24vh;left:0;right:0;text-align:center;z-index:1;
+  font-family:var(--disp);font-weight:700;color:#fff;font-size:min(clamp(15px,1.6vw,24px),3vh);text-shadow:0 2px 16px rgba(0,0,0,.6)}
+#f5 .pname small{display:block;font-family:var(--mono);font-weight:500;font-size:.6em;letter-spacing:.18em;text-transform:uppercase;color:#F4C9B6;margin-top:.3em}
+#f5 .tri .p.joy .pname{color:var(--yellow)}
+#f5 .col{justify-content:flex-end;max-width:none;align-items:center;text-align:center;padding-bottom:9vh}
+#f5 .eye{justify-content:center}
+#f5 h1{font-size:min(clamp(30px,4.6vw,68px),9vh)}
+#f5 .decision{margin-left:auto;margin-right:auto;text-align:center}
+
+/* ---- closing slide: crossfade + signature line ---- */
+#sg .show{position:absolute;inset:0;z-index:0;overflow:hidden}
+#sg .show .frame{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+#sg .show .frame img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04)}
+#sg .show .frame.on{opacity:1;z-index:1}
+#sg .show .frame.on img{animation:kb 7s ease-out forwards}
+#sg .show .vig{position:absolute;inset:0;z-index:2;
+  background:radial-gradient(120% 100% at 50% 50%, rgba(22,11,5,.45) 0%, rgba(22,11,5,.75) 70%, rgba(22,11,5,.88) 100%)}
+#sg .col{align-items:center;text-align:center;max-width:none;justify-content:center}
+#sg .eye{justify-content:center}
+#sg h1{font-size:min(clamp(30px,5vw,76px),11vh);max-width:28ch}
+#sg .sub{font-family:var(--disp);font-style:italic;font-weight:400;color:var(--yellow);font-size:min(clamp(18px,2.6vw,38px),4.6vh);margin-top:2vh;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+#sg .seven{display:flex;gap:clamp(8px,1vw,16px);margin-top:4vh;flex-wrap:wrap;justify-content:center}
+#sg .seven span{font-family:var(--mono);font-weight:600;font-size:clamp(10px,1vw,13px);letter-spacing:.1em;color:#FFF1E0;
+  border:1px solid rgba(255,255,255,.4);border-radius:30px;padding:.55em 1.1em;background:rgba(22,11,5,.35)}
+#sg .seven span.b{border-color:var(--blue);color:var(--blue)}
+#sg .note{margin-top:3.4vh;font-family:var(--mono);font-weight:500;font-size:clamp(10px,1vw,12.5px);letter-spacing:.06em;color:#C9A892}
+
+/* ---- nav chrome ---- */
+.bar{position:fixed;top:0;left:0;height:4px;background:var(--yellow);z-index:70;transition:width .5s ease}
+.dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:11px;z-index:70}
+.dots button{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.32);cursor:pointer;transition:.3s;padding:0}
+.dots button.on{background:var(--yellow);transform:scale(1.4)}
+.nav-arrow{position:fixed;bottom:16px;z-index:70;background:none;border:none;cursor:pointer;color:var(--yellow);font-size:30px;opacity:.55;transition:.25s;line-height:1}
+.nav-arrow:hover{opacity:1}
+#prevBtn{right:76px}#nextBtn{right:34px}
+.fs{position:fixed;top:16px;right:18px;z-index:70;background:rgba(34,34,35,.45);border:1px solid rgba(255,255,255,.3);color:#fff;
+  font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.12em;padding:7px 13px;border-radius:20px;cursor:pointer;text-transform:uppercase}
+.kbd-hint{position:fixed;bottom:24px;left:24px;z-index:70;font-family:var(--mono);font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.count{position:fixed;top:18px;left:24px;z-index:70;font-family:var(--mono);font-weight:600;font-size:clamp(10px,1vw,12px);letter-spacing:.2em;color:rgba(255,255,255,.7)}
+
+/* responsive */
+@media (max-width:820px){
+  .col{padding:5vh 7vw;max-width:none}
+  .why{display:none}
+  #f1 .test{display:none}
+  #f2 .bg img{opacity:.35}
+  #f7 .line .lg{display:none}
+  .wm{font-size:48vw;-webkit-text-stroke-width:1.5px}
+  #f5 .tri{flex-direction:column}
+  #f5 .pname{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important}
+  .r{opacity:1 !important;transform:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="bar" id="bar"></div>
+<div class="count" id="count"></div>
+<button class="fs" id="fsBtn">⤢ Fullscreen</button>
+<div class="kbd-hint">← → to navigate · F fullscreen</div>
+<div class="grain"></div>
+
+<div class="deck" id="deck">
+
+  <!-- COVER -->
+  <section class="slide" id="c">
+    <div class="bg"><img src="assets/bg/cover_45th_celebration.jpg" alt="Julie's 45th anniversary celebration — confetti over the stage"><div class="grad"></div></div>
+    <div class="cap">45th Anniversary Celebration · 2026</div>
+    <div class="col">
+      <div class="lockup r" style="--d:.1s">
+        <img src="assets/paprika-dark.png" alt="Paprika" onerror="this.outerHTML='&lt;span class=&quot;txt&quot;&gt;Paprika&lt;/span&gt;'">
+        <span class="cx">✕</span>
+        <img class="julies" src="assets/Julies-Logo.png" alt="Julie's Bakeshop" onerror="this.outerHTML='&lt;span class=&quot;txt&quot; style=&quot;color:#FF0000&quot;&gt;Julie\'s&lt;/span&gt;'">
+      </div>
+      <h1 class="r" style="--d:.3s">Seven<br><em>Foundations.</em></h1>
+      <div class="sub r" style="--d:.55s">Before we build the refresh — the decisions everything else stands on.</div>
+      <div class="foot r" style="--d:.8s">For the Board · the CEO · Regional Partners — June 2026</div>
+    </div>
+  </section>
+
+  <!-- F1 — BRING BACK THE BLUE -->
+  <section class="slide fblue" id="f1">
+    <div class="bg"><img src="assets/bg/f1_1981_first_store.jpg" alt="The first Julie's store in Mandaue, 1981 — original logo in red and blue"><div class="grad"></div></div>
+    <div class="cap">The First Store · Mandaue, 1981 — the original red &amp; blue</div>
+    <div class="wm">01</div>
+    <div class="test r" style="--d:1.1s">
+      <div class="tframe"><img src="assets/Retro Test 1.png" alt="Retro Test 01 — the heritage oval logo in red and blue, early exploration"></div>
+      <span class="ttag">Retro Test 01 · Early exploration — WIP</span>
+    </div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 01 · Klasiko, Ngayon</div>
+      <h1 class="r" style="--d:.25s">Bring back <em>the blue.</em></h1>
+      <div class="decision r" style="--d:.5s">The classic red-and-blue, reclaimed as the color foundation. <b>Strategy, not nostalgia.</b></div>
+      <div class="why r" style="--d:.7s">Red and yellow is the crowded code of fast food. Red and blue belongs to the country's most trusted institutions — and the flag. No bakery competitor owns it. It's Julie's to take back.</div>
+      <div class="means r" style="--d:.9s"><span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 10 18 20 6" stroke="#9DBCFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="mt"><b>Sign-off means</b>Red-and-blue leads the new palette; exact heritage values come from your 2021 source files.</div></div>
+    </div>
+  </section>
+
+  <!-- F2 — THE BRAND BECOMES A PERSON -->
+  <section class="slide" id="f2">
+    <div class="bg"><img src="assets/bg/f2_tita_julie.png" alt="Tita Julie — the face of the brand, holding fresh pandesal"><div class="grad"></div></div>
+    <div class="cap">Tita Julie · The Face of the Brand</div>
+    <div class="wm">02</div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 02 · Tita Julie</div>
+      <h1 class="r" style="--d:.25s">The brand becomes <em>a person.</em></h1>
+      <div class="decision r" style="--d:.5s">From practical bakeshop to warm, community-rooted brand — expressed as one person: <b>Tita Julie.</b></div>
+      <div class="why r" style="--d:.7s">Warm, not a pushover. Kapit-bahay, not intrusive. Shares "wais" tips, never a know-it-all. Modern, but rooted in tradition. Real faces at every touchpoint — bakers, branch staff, neighbors.</div>
+      <div class="means r" style="--d:.9s"><span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 10 18 20 6" stroke="#FFE400" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="mt"><b>Sign-off means</b>Every touchpoint is written and designed as if Tita Julie herself were behind the counter.</div></div>
+    </div>
+  </section>
+
+  <!-- F3 — ONE MARK, ONE MASCOT, ONE SYSTEM -->
+  <section class="slide" id="f3">
+    <div class="bg"><img src="assets/bg/f3_talamban_2024.jpg" alt="Talamban branch, 2024 — elements of several brand eras on one storefront"><div class="grad"></div></div>
+    <div class="cap">Talamban Branch · 2024 — several eras, one storefront</div>
+    <div class="wm">03</div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 03 · Consolidation</div>
+      <h1 class="r" style="--d:.25s">One mark. One mascot.<br><em>One system.</em></h1>
+      <div class="decision r" style="--d:.5s">Four logos and three Tita Julies become <b>one</b> — with a retirement plan for the rest.</div>
+      <div class="why r" style="--d:.7s">The June 2026 audit found four logo variants in active use, at least three Tita Julie illustration styles plus a second mascot, and storefronts spanning four renovation eras — often within a single branch.</div>
+      <div class="means r" style="--d:.9s"><span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 10 18 20 6" stroke="#FFE400" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="mt"><b>Sign-off means</b>A single identity system — and an explicit decision on Popoy Pandesal's future role.</div></div>
+    </div>
+  </section>
+
+  <!-- F4 — EVOLUTION, NOT REVOLUTION -->
+  <section class="slide" id="f4">
+    <div class="bg"><img src="assets/bg/f4_branch_render.jpg" alt="Julie's current branch standard — familiar at first glance, fresher at second"><div class="grad"></div></div>
+    <div class="cap">The Branch Standard · Julie's on its best day</div>
+    <div class="wm">04</div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 04 · The Guiding Test</div>
+      <h1 class="r" style="--d:.25s">Evolution,<br><em>not revolution.</em></h1>
+      <div class="decision r" style="--d:.5s">A refinement, not a rebrand. The test for every design decision: <b>would a longtime customer in line for pandesal notice something was taken away?</b></div>
+      <div class="why r" style="--d:.7s">With 600+ stores, the equity in the mark is irreplaceable. "Ngayon at Kailanman" demands continuity — a brand can't claim "kailanman" while discarding its own history.</div>
+      <div class="means r" style="--d:.9s"><span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 10 18 20 6" stroke="#FFE400" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="mt"><b>Sign-off means</b>The test becomes the acceptance criterion for every design review — explored heritage-leaning to forward-leaning.</div></div>
+    </div>
+  </section>
+
+  <!-- F5 — ONE AUDIENCE, ONE BRIDGE (persona triptych) -->
+  <section class="slide" id="f5">
+    <div class="tri">
+      <div class="p"><img src="assets/persona-julie-full.jpg" alt="Julie — urban" style="object-position:50% 20%"><div class="shade"></div><div class="pname">Julie<small>Urban</small></div></div>
+      <div class="p joy"><img src="assets/persona-joy-full.jpg" alt="Joy — the bridge" style="object-position:50% 24%"><div class="shade"></div><div class="pname">Joy<small>The Bridge</small></div></div>
+      <div class="p"><img src="assets/persona-anna-full.jpg" alt="Anna — rural" style="object-position:60% 26%"><div class="shade"></div><div class="pname">Anna<small>Rural</small></div></div>
+    </div>
+    <div class="wm">05</div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 05 · The Audience</div>
+      <h1 class="r" style="--d:.25s">One audience, <em>one bridge.</em></h1>
+      <div class="decision r" style="--d:.5s">Speak to Joy — reach Julie and Anna at once. <b>One voice, one campaign, the whole country.</b></div>
+    </div>
+  </section>
+
+  <!-- F6 — DIGITAL-FIRST, STREET-PROVEN -->
+  <section class="slide" id="f6">
+    <div class="bg"><img src="assets/bg/f6_toledo_flagship.jpg" alt="Toledo flagship store preview, 2026 — the next-generation branch"><div class="grad"></div></div>
+    <div class="cap">Toledo Flagship · 2026 Preview</div>
+    <div class="wm">06</div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 06 · Every Scale</div>
+      <h1 class="r" style="--d:.25s">Digital-first,<br><em>street-proven.</em></h1>
+      <div class="decision r" style="--d:.5s">Storefront sign, delivery-app tile, social avatar, bread bag — <b>one mark that performs at every scale.</b></div>
+      <div class="why r" style="--d:.7s">The current mark was built for signage and print. The brand now lives on every screen — and small-size legibility is where heritage marks usually fail.</div>
+      <div class="means r" style="--d:.9s"><span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 10 18 20 6" stroke="#FFE400" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="mt"><b>Sign-off means</b>Small-scale performance is a design requirement from day one — not a post-hoc adaptation.</div></div>
+    </div>
+  </section>
+
+  <!-- F7 — TINAPAY NG BAYAN -->
+  <section class="slide" id="f7">
+    <div class="bg"><img src="assets/bg/f7_bread.png" alt="Julie's bread — the tinapay ng bayan"><div class="grad"></div></div>
+    <div class="wm">07</div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">Foundation 07 · The Platform</div>
+      <h1 class="r" style="--d:.25s">Tinapay ng Bayan,<br><em>the platform.</em></h1>
+      <div class="decision r" style="--d:.5s">The territory locks now. The lines are live candidates — <b>we're pitching them today.</b></div>
+      <div class="lines">
+        <div class="line r" style="--d:.65s"><span class="li">01</span>
+          <div><span class="lt">Daan Muna Kay Tita Julie</span><span class="lg">The invitation — drop by, she's expecting you.</span></div></div>
+        <div class="line r" style="--d:.78s"><span class="li">02</span>
+          <div><span class="lt">Agi sa'ta sa Julie's</span><span class="lg">The Visayan warmth — "come by ours."</span></div></div>
+        <div class="line r" style="--d:.91s"><span class="li">03</span>
+          <div><span class="lt">Ang Tinapay ng Bayan, Ngayon at Kailanman</span><span class="lg">The legacy line — the nation's bread, now and always.</span></div></div>
+      </div>
+      <span class="wip r" style="--d:1.05s">Work in progress · For discussion today</span>
+      <div class="means r" style="--d:1.2s"><span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 10 18 20 6" stroke="#FFE400" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="mt"><b>Sign-off means</b>Approval covers the territory and tone — the winning line is chosen and refined together in the work ahead.</div></div>
+    </div>
+  </section>
+
+  <!-- CLOSE / SIGNATURE -->
+  <section class="slide" id="sg">
+    <div class="show" id="sgShow">
+      <div class="frame on"><img src="assets/bg/f1_1981_first_store.jpg" alt="The first Julie's store, Mandaue, 1981"></div>
+      <div class="frame"><img src="assets/bg/f4_branch_render.jpg" alt="Julie's current branch standard"></div>
+      <div class="frame"><img src="assets/bg/cover_45th_celebration.jpg" alt="Julie's 45th anniversary celebration"></div>
+      <div class="vig"></div>
+    </div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">The Sign-Off</div>
+      <h1 class="r" style="--d:.3s">The foundations are yours.<br>The next chapter, <em>we build together.</em></h1>
+      <div class="sub r" style="--d:.55s">Ngayon at kailanman.</div>
+      <div class="seven r" style="--d:.8s">
+        <span class="b">01 The Blue</span><span>02 A Person</span><span>03 One System</span><span>04 Evolution</span>
+        <span>05 One Bridge</span><span>06 Every Scale</span><span>07 The Platform</span>
+      </div>
+      <div class="note r" style="--d:1s">Full rationale &amp; approval matrix · Brand Foundations Sign-Off V1</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<button class="nav-arrow" id="prevBtn" aria-label="Previous slide">‹</button>
+<button class="nav-arrow" id="nextBtn" aria-label="Next slide">›</button>
+
+<script>
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const slides=[...document.querySelectorAll('.slide')];
+const dotsWrap=document.getElementById('dots');
+const bar=document.getElementById('bar');
+const count=document.getElementById('count');
+let idx=0;
+
+slides.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Go to slide '+(i+1));b.onclick=()=>go(i);dotsWrap.appendChild(b);});
+const dots=[...dotsWrap.children];
+
+/* closing crossfade */
+const sgFrames=[...document.querySelectorAll('#sgShow .frame')];
+let sgCur=0,sgTimer=null;
+function sgStart(){ if(reduce||sgFrames.length<2) return; sgStop();
+  sgTimer=setInterval(()=>{ sgFrames[sgCur].classList.remove('on'); sgCur=(sgCur+1)%sgFrames.length; sgFrames[sgCur].classList.add('on'); },4200); }
+function sgStop(){ if(sgTimer){clearInterval(sgTimer);sgTimer=null;} }
+function sgReset(){ sgFrames.forEach((f,i)=>f.classList.toggle('on',i===0)); sgCur=0; }
+
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach(s=>s.classList.remove('active'));
+  idx=n;
+  slides[idx].classList.add('active');
+  dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+  bar.style.width=((idx+1)/slides.length*100)+'%';
+  count.textContent=String(idx).padStart(2,'0')==='00'&&idx===0?'COVER':(idx===slides.length-1?'SIGN-OFF':String(idx).padStart(2,'0')+' / 07');
+  if(slides[idx].id==='sg'){ sgReset(); sgStart(); } else { sgStop(); }
+}
+const next=()=>go(idx+1), prev=()=>go(idx-1);
+document.getElementById('nextBtn').onclick=next;
+document.getElementById('prevBtn').onclick=prev;
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev();}
+  if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+  if(e.key==='f'||e.key==='F')toggleFs();
+});
+function toggleFs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+document.getElementById('fsBtn').onclick=toggleFs;
+let sx=0;addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)dx<0?next():prev();},{passive:true});
+
+go(0);
+</script>
+</body>
+</html>

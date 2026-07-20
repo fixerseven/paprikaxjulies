@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Julie's × Paprika — Execom Presentation · July 6 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E60012; --deepred:#AF1F24; --blue:#1E3FCB; --yellow:#FFD400;
+  --orange:#F9992F; --beige:#FFE3C5; --mellow:#FAF494; --cream:#FFF7EC;
+  --ink:#222223; --muted:#8B7355; --line:#F0D9B8; --white:#FFFFFF;
+  --disp:'Poppins',system-ui,sans-serif; --body:'Varela Round','Poppins',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#000;font-family:var(--body);color:var(--ink)}
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(26px,4vh,60px) clamp(36px,6vw,100px);opacity:0;visibility:hidden;transform:scale(1.02);
+  transition:opacity .6s ease,transform .6s ease,visibility .6s;overflow:hidden}
+.slide .wrap{transition:transform .3s ease}
+.slide.active{opacity:1;visibility:visible;transform:scale(1);z-index:2}
+.bg-cream{background:var(--cream)} .bg-white{background:var(--white)}
+.bg-yellow{background:var(--yellow)} .bg-blue{background:var(--blue)}
+.bg-ink{background:var(--ink)} .bg-beige{background:var(--beige)}
+
+/* chrome */
+.chrome{position:fixed;z-index:30;font-family:var(--disp);font-weight:600;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.brandmark{top:22px;left:30px;display:flex;align-items:center;gap:11px}
+.brandmark img{display:block}
+.brandmark .pap{height:17px}
+.brandmark .jul{height:20px}
+.brandmark .x{color:var(--muted);font-family:var(--disp);font-weight:600;font-size:13px}
+.brandmark .pap-w{display:none}
+.dark .brandmark .pap-d{display:none}
+.dark .brandmark .pap-w{display:block}
+.dark .brandmark .x{color:rgba(255,255,255,.6)}
+.counter{top:26px;right:30px;color:var(--muted)}
+.dark .counter{color:rgba(255,255,255,.7)}
+.progress{position:fixed;left:0;bottom:0;height:4px;background:var(--red);z-index:30;
+  width:0;transition:width .5s ease}
+.dots{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:30;
+  max-width:80vw;flex-wrap:wrap;justify-content:center}
+.dots button{width:8px;height:8px;border-radius:50%;border:none;background:rgba(0,0,0,.18);
+  cursor:pointer;padding:0;transition:transform .2s,background .2s}
+.dots button.on{background:var(--red);transform:scale(1.5)}
+.dark~.dots button{background:rgba(255,255,255,.25)}
+.nav-hint{position:fixed;bottom:16px;right:24px;z-index:30;font-family:var(--disp);
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);opacity:.7}
+.disclaimer{position:fixed;bottom:14px;left:30px;z-index:30;font-family:var(--disp);
+  font-weight:600;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);opacity:.8;max-width:46ch}
+.dark .disclaimer{color:rgba(255,255,255,.6)}
+
+/* type */
+.eyebrow{font-family:var(--disp);font-weight:700;font-size:clamp(11px,1vw,14px);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:24px}
+.dark .eyebrow{color:var(--yellow)}
+h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.02em;
+  font-size:clamp(38px,6.4vw,104px)}
+h2{font-family:var(--disp);font-weight:800;line-height:1.02;letter-spacing:-.015em;
+  font-size:clamp(28px,4.2vw,66px)}
+h3{font-family:var(--disp);font-weight:700;font-size:clamp(18px,1.7vw,26px)}
+.lead{font-size:clamp(17px,1.7vw,26px);line-height:1.5;max-width:60ch;color:var(--ink);margin-top:22px}
+.dark .lead{color:rgba(255,255,255,.92)}
+.sub{font-size:clamp(14px,1.15vw,18px);line-height:1.55;color:var(--muted);max-width:56ch}
+.dark .sub{color:rgba(255,255,255,.65)}
+.red{color:var(--red)} .blue{color:var(--blue)} .yel{color:var(--yellow)}
+em{font-style:normal;color:var(--red)}
+.dark em{color:var(--yellow)}
+.pill{display:inline-block;border:2.5px solid var(--blue);border-radius:999px;
+  padding:7px 20px;font-family:var(--disp);font-weight:700;font-size:13px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.pill.red{border-color:var(--red);color:var(--red)}
+
+/* reveal */
+.r{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.active .r{opacity:1;transform:none;transition-delay:var(--d,0s)}
+.zoom{opacity:0;transform:scale(1.06);transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.active .zoom{opacity:1;transform:none;transition-delay:var(--d,0s)}
+
+/* layout helpers */
+.wrap{max-width:1280px;width:100%;margin:0 auto}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,72px);align-items:center}
+.imgcard{border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.18);background:#fff}
+.imgcard img{width:100%;height:100%;object-fit:cover;display:block}
+.note{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--disp);
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  background:rgba(0,0,0,.04);padding:6px 12px;border-radius:7px}
+.dark .note{color:rgba(255,255,255,.7);background:rgba(255,255,255,.1)}
+.tag{display:inline-block;font-family:var(--disp);font-weight:700;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;
+  background:var(--blue);color:#fff;margin-bottom:14px}
+.tag.r2{background:var(--red)} .tag.y{background:var(--yellow);color:var(--ink)}
+.tag.g{background:var(--muted)} .tag.grn{background:#1E7B3C}
+
+/* agenda list */
+.agenda{display:grid;grid-template-columns:1fr 1fr;gap:10px 46px;margin-top:26px;max-width:1000px}
+.agenda .item{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.agenda .num{font-family:var(--disp);font-weight:800;font-size:15px;color:var(--red);min-width:26px}
+.agenda .lbl{font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.4vw,19px);color:var(--ink)}
+.agenda .sm{font-family:var(--disp);font-weight:600;font-size:12px;color:var(--muted);display:block;margin-top:2px}
+
+/* cover */
+.cover-rule{width:0;height:5px;background:var(--yellow);margin:30px 0;
+  transition:width 1s cubic-bezier(.2,.7,.2,1) .5s}
+.active .cover-rule{width:min(420px,55vw)}
+
+/* hero background video */
+.bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.bgvid-veil{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(10,16,46,.86) 0%,rgba(12,20,60,.55) 55%,rgba(20,40,140,.35) 100%)}
+.hasvideo .wrap{position:relative;z-index:2}
+
+/* full-bleed design boards */
+.slide.board{padding:0}
+.board .bimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  cursor:zoom-in;animation:kb 16s ease-out forwards}
+.board.contain{background:var(--ink)}
+.board.contain .bimg{object-fit:contain}
+.board.cream{background:var(--cream)}
+@keyframes kb{from{transform:scale(1.05)}to{transform:scale(1)}}
+.boardcap{position:absolute;left:24px;bottom:22px;z-index:6;display:flex;align-items:center;gap:10px}
+.boardcap .sect{font-family:var(--disp);font-weight:800;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:#fff;background:var(--blue);padding:7px 14px;border-radius:999px;
+  box-shadow:0 8px 22px rgba(0,0,0,.25)}
+.boardcap .sect.r2{background:var(--red)}
+.boardcap .name{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:#fff;background:rgba(34,34,35,.72);padding:7px 14px;border-radius:999px}
+.boardhint{position:absolute;right:24px;bottom:22px;z-index:6;font-family:var(--disp);font-weight:600;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(34,34,35,.55);
+  padding:6px 12px;border-radius:999px;opacity:.85}
+
+/* gallery grid (taglines) */
+.galhead{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.gallery{display:grid;gap:14px;margin-top:22px}
+.gallery.g6{grid-template-columns:repeat(3,1fr)}
+.gallery.g7{grid-template-columns:repeat(4,1fr)}
+.gcell{border-radius:14px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.16);background:#fff;
+  cursor:zoom-in;position:relative;transition:transform .25s ease,box-shadow .25s ease}
+.gcell:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(0,0,0,.24)}
+.gcell img{width:100%;height:clamp(120px,20vh,190px);object-fit:cover;display:block}
+.gcell figcaption{font-family:var(--disp);font-weight:700;font-size:11.5px;letter-spacing:.03em;
+  color:var(--ink);padding:9px 12px;display:flex;align-items:center;gap:7px}
+.gcell figcaption .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex:none}
+.gcell.bis figcaption .dot{background:var(--orange)}
+.gcell .expand{position:absolute;top:9px;right:9px;width:26px;height:26px;border-radius:7px;
+  background:rgba(34,34,35,.6);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:13px;opacity:0;transition:opacity .2s}
+.gcell:hover .expand{opacity:1}
+.leg{display:flex;gap:18px;margin-top:14px;font-family:var(--disp);font-weight:600;font-size:12px;color:var(--muted)}
+.leg span{display:flex;align-items:center;gap:7px}
+.leg i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+/* two-finalist intro */
+.finalists{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}
+.finalists .fin{background:#fff;border-radius:16px;padding:22px 24px;box-shadow:0 14px 36px rgba(0,0,0,.1);
+  border-top:5px solid var(--blue)}
+.finalists .fin:nth-child(2){border-top-color:var(--red)}
+.finalists .fin h3{font-size:clamp(20px,2.2vw,30px)}
+.finalists .fin .flow{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.45}
+
+/* three moves (blue recap) */
+.moves{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.moves .mv{background:#fff;border-radius:16px;padding:24px 22px;box-shadow:0 14px 36px rgba(0,0,0,.1);
+  border:1px solid var(--line);position:relative}
+.moves .mv .num{font-family:var(--disp);font-weight:800;font-size:13px;color:var(--muted);letter-spacing:.1em}
+.moves .mv h3{margin:8px 0 8px;font-size:clamp(17px,1.7vw,24px)}
+.moves .mv p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.moves .mv.hero{border-top:5px solid var(--blue)}
+
+/* logo stage & placeholder */
+.logostage{background:#fff;border:1px solid var(--line);border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;
+  padding:clamp(18px,2.6vw,36px);cursor:zoom-in}
+.logostage img{width:100%;max-height:32vh;object-fit:contain;display:block}
+.wipstage{margin-top:26px;border:3px dashed rgba(34,34,35,.35);border-radius:20px;
+  padding:clamp(30px,5vh,56px) clamp(24px,3vw,48px);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:12px;background:rgba(255,255,255,.45)}
+.wipstage .big{font-family:var(--disp);font-weight:800;font-size:clamp(20px,2.4vw,34px)}
+.wipstage p{font-size:clamp(13px,1.2vw,17px);color:var(--ink);opacity:.75;max-width:54ch}
+
+/* revised mark & mnemonic — deterministic vh sizing, cannot overflow */
+.markstage{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.1);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:16px 20px 12px;cursor:zoom-in}
+.markstage img{display:block;height:20vh;max-width:100%;width:auto;object-fit:contain}
+.markstage .marklbl{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-top:10px}
+.markrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.markrow figure{background:#fff;border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);padding:12px;cursor:zoom-in;
+  display:flex;flex-direction:column;align-items:center;transition:transform .2s}
+.markrow figure:hover{transform:translateY(-4px)}
+.markrow img{display:block;height:9vh;max-width:100%;width:auto;object-fit:contain}
+.markrow figcaption{font-family:var(--disp);font-weight:700;font-size:11.5px;color:var(--muted);
+  margin-top:8px;text-align:center}
+.mnemrow{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:16px;margin-top:22px}
+.mnemrow .cell{background:#fff;border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);padding:12px;display:flex;flex-direction:column;
+  align-items:center;transition:transform .2s}
+.mnemrow .cell:hover{transform:translateY(-4px)}
+.mnemrow .cell[data-full]{cursor:zoom-in}
+.mnemrow .media{height:26vh;width:100%;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;border-radius:10px}
+.mnemrow img,.mnemrow video{max-height:100%;max-width:100%;width:auto;height:auto;
+  object-fit:contain;display:block}
+.mnemrow figcaption{font-family:var(--disp);font-weight:700;font-size:11.5px;color:var(--muted);
+  margin-top:10px;text-align:center}
+@media(max-width:880px){.mnemrow{grid-template-columns:1fr}.mnemrow .media{height:18vh}}
+
+/* decision cards */
+.reqcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.reqcards .req{background:#fff;border-radius:16px;padding:26px 22px;box-shadow:0 14px 36px rgba(0,0,0,.1);
+  border:1px solid var(--line);text-align:center}
+.reqcards .req .ic{font-size:40px;margin-bottom:12px}
+.reqcards .req h3{margin-bottom:6px}
+.reqcards .req p{font-size:13px;color:var(--muted)}
+
+.askbar{margin-top:26px;display:inline-flex;align-items:center;gap:14px;background:var(--ink);
+  color:#fff;border-radius:14px;padding:16px 26px;font-family:var(--disp);font-weight:600;
+  font-size:clamp(14px,1.3vw,19px)}
+.askbar .q{color:var(--yellow);font-weight:800}
+
+/* lightbox with gallery nav */
+.lightbox{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
+  background:rgba(12,12,15,.94);opacity:0;pointer-events:none;transition:opacity .25s ease;padding:4vh 5vw}
+.lightbox.on{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:86vh;object-fit:contain;border-radius:10px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb-cap{position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);font-family:var(--disp);
+  font-weight:700;font-size:15px;letter-spacing:.03em;color:#fff;background:rgba(0,0,0,.5);
+  padding:9px 20px;border-radius:999px;text-align:center}
+.lb-count{position:absolute;top:4vh;right:5vw;font-family:var(--disp);font-weight:700;font-size:13px;
+  letter-spacing:.1em;color:#fff;background:rgba(255,255,255,.14);padding:7px 16px;border-radius:999px}
+.lb-close{position:absolute;top:3.4vh;left:5vw;width:44px;height:44px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.14);color:#fff;font-size:22px;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;line-height:1}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;
+  border:none;background:rgba(255,255,255,.92);color:var(--ink);font-size:30px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);transition:transform .2s,background .2s}
+.lb-btn:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+.lb-btn.prev{left:3vw} .lb-btn.next{right:3vw}
+.lb-btn.hide{display:none}
+
+@media(max-width:880px){
+  .grid2{grid-template-columns:1fr;gap:24px}
+  .agenda{grid-template-columns:1fr}
+  .finalists{grid-template-columns:1fr}
+  .moves{grid-template-columns:1fr}
+  .gallery.g6,.gallery.g7{grid-template-columns:repeat(2,1fr)}
+  .reqcards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="chrome brandmark">
+  <img class="pap pap-d" src="assets/paprika-dark.png" alt="Paprika">
+  <img class="pap pap-w" src="assets/paprika-white.png" alt="Paprika">
+  <span class="x">×</span>
+  <img class="jul" src="assets/julies-script.png" alt="Julie's">
+</div>
+<div class="chrome counter"><span id="cur">01</span> / <span id="tot">27</span></div>
+<div class="progress" id="prog"></div>
+<div class="nav-hint">← → / swipe · F fullscreen</div>
+<div class="chrome disclaimer">Concepts &amp; works in progress — for alignment, not final.</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 COVER · HERO VIDEO -->
+  <section class="slide bg-blue dark active hasvideo" data-theme="dark">
+    <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+      <source src="assets/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="bgvid-veil"></div>
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Brand Refresh · Execom Presentation · July 6, 2026</div>
+      <h1 class="r" style="--d:.25s;color:var(--cream)">The brand,<br>in <em>blue</em>.</h1>
+      <div class="cover-rule"></div>
+      <p class="lead r" style="--d:.6s;color:var(--cream)">The evolving identity of Julie's Bakeshop — where the approved blue takes the logo, the typography that will speak for it, and the tagline it will carry.</p>
+    </div>
+  </section>
+
+  <!-- 2 AGENDA -->
+  <section class="slide bg-cream">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Today's agenda</div>
+      <h2 class="r" style="--d:.22s">What we'll walk<br>through <em>together</em>.</h2>
+      <div class="agenda">
+        <div class="item r" style="--d:.36s"><span class="num">01</span><span class="lbl">The Blue, Approved<span class="sm">Recap — and why it was the right call</span></span></div>
+        <div class="item r" style="--d:.43s"><span class="num">02</span><span class="lbl">The Logo's Journey<span class="sm">Evolution of the mark · the line as mnemonic</span></span></div>
+        <div class="item r" style="--d:.50s"><span class="num">03</span><span class="lbl">Revised Logo Samples<span class="sm">The proposed mark · mnemonic · badge</span></span></div>
+        <div class="item r" style="--d:.57s"><span class="num">04</span><span class="lbl">Typography<span class="sm">Two variations, applied in the real world</span></span></div>
+        <div class="item r" style="--d:.64s"><span class="num">05</span><span class="lbl">Tagline Options<span class="sm">Two finalists + one refinement</span></span></div>
+        <div class="item r" style="--d:.71s"><span class="num">06</span><span class="lbl">The Decision<span class="sm">What we need from this room today</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 SECTION DIVIDER -->
+  <section class="slide bg-blue dark" data-theme="dark">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Section One</div>
+      <h1 class="r" style="--d:.25s;color:var(--cream)">Branding<br><em style="color:var(--yellow)">Updates</em>.</h1>
+      <p class="lead r" style="--d:.6s;color:var(--cream)">First, a quick look back — the decision this room already made, and everything it unlocks.</p>
+    </div>
+  </section>
+
+  <!-- 4 RECAP · THE BLUE, APPROVED -->
+  <section class="slide bg-cream">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Recap · Approved last session</div>
+      <h2 class="r" style="--d:.2s">Julie's Blue.<br><em>Approved.</em></h2>
+      <p class="lead r" style="--d:.4s">Not a new color — your heritage color, brought back on purpose. Yellow-and-red is a crowded category; the blue is owned by no one else, and it was always yours.</p>
+      <div class="moves">
+        <div class="mv hero r" style="--d:.55s"><span class="tag grn">Approved</span><div class="num">01</div><h3 class="blue">Julie's Blue, restored</h3><p>The heritage color returns as a primary — with modern craft, not nostalgia.</p></div>
+        <div class="mv r" style="--d:.66s"><div class="num">02</div><h3>The line</h3><p>An ownable pill that frames and protects the wordmark across every format.</p></div>
+        <div class="mv r" style="--d:.77s"><div class="num">03</div><h3>Free of the category</h3><p>Julie's is bigger than the bakeshop case — built for meals, coffee, and whatever comes next.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 LOGO EVOLUTION -->
+  <section class="slide bg-white">
+    <div class="wrap grid2">
+      <div>
+        <div class="eyebrow r" style="--d:.1s">The Logo's Journey · 1981 → today</div>
+        <h2 class="r" style="--d:.2s">Little by little,<br>the blue <em>faded out</em>.</h2>
+        <p class="lead r" style="--d:.4s">From 1981 the mark simplified — and somewhere along the way, the blue slipped away with it. Restoring it isn't reinvention. It's returning the mark to its fullest self.</p>
+        <div class="note r" style="--d:.55s">Click the chart to view full screen.</div>
+      </div>
+      <div class="imgcard zoom" style="--d:.45s;cursor:zoom-in" data-full="assets/logo-evolution.png" data-cap="Evolution of the Julie's mark — 1981 to today">
+        <img src="assets/logo-evolution.png" alt="Evolution of the Julie's logo, 1981 to present" style="object-fit:contain;background:#fff">
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 THE LINE MNEMONIC · SPECIAL PAGE -->
+  <section class="slide bg-blue dark" data-theme="dark">
+    <div class="wrap grid2">
+      <div>
+        <div class="eyebrow r" style="--d:.1s">The line · a system, not a cage</div>
+        <h2 class="r" style="--d:.2s;color:var(--cream)">The line becomes<br>our <em style="color:var(--yellow)">mnemonic</em>.</h2>
+        <p class="lead r" style="--d:.4s;color:var(--cream)">More than a frame for the logo — a flexible, repeatable device that can hold any word and stretch across the whole brand. One consistent shape, instantly Julie's, wherever it travels.</p>
+        <p class="sub r" style="--d:.55s;margin-top:14px">The same line that carries the wordmark can carry Bread, Coffee, Community, Donuts — and whatever comes next.</p>
+      </div>
+      <div class="imgcard zoom" style="--d:.45s;cursor:zoom-in" data-full="assets/line-tests.png" data-cap="The line — one device, every word">
+        <img src="assets/line-tests.png" alt="The line applied as a flexible brand device across categories" style="object-fit:contain;background:#fff">
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 BLUE IN THE WORLD -->
+  <section class="slide bg-white">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Where we left off · July 2</div>
+      <h2 class="r" style="--d:.2s">The blue, already<br><em>in the world</em>.</h2>
+      <div class="gallery g6" data-gallery="blueworld">
+        <figure class="gcell" data-full="assets/logoA-mock1.jpg" data-cap="The Line — packaging & blade sign"><img src="assets/logoA-mock1.jpg" alt="Blue line packaging and storefront"><span class="expand">⤢</span><figcaption><span class="dot"></span>Packaging &amp; blade sign</figcaption></figure>
+        <figure class="gcell" data-full="assets/logoA-mock2.jpg" data-cap="The Line — packaging flat-lay"><img src="assets/logoA-mock2.jpg" alt="Blue line packaging flat-lay"><span class="expand">⤢</span><figcaption><span class="dot"></span>Packaging flat-lay</figcaption></figure>
+        <figure class="gcell" data-full="assets/logoA-mock3.jpg" data-cap="The Line — takeout system"><img src="assets/logoA-mock3.jpg" alt="Blue line takeout system"><span class="expand">⤢</span><figcaption><span class="dot"></span>Takeout system</figcaption></figure>
+        <figure class="gcell" data-full="assets/logoA-mock4.jpg" data-cap="The Line — full brand system"><img src="assets/logoA-mock4.jpg" alt="Blue line full brand system"><span class="expand">⤢</span><figcaption><span class="dot"></span>Full system</figcaption></figure>
+        <figure class="gcell" data-full="assets/store1.jpg" data-cap="The Line — storefront, full facade"><img src="assets/store1.jpg" alt="Storefront full facade"><span class="expand">⤢</span><figcaption><span class="dot"></span>Storefront — facade</figcaption></figure>
+        <figure class="gcell" data-full="assets/store3.jpg" data-cap="The Line — signage close-up"><img src="assets/store3.jpg" alt="Storefront signage close-up"><span class="expand">⤢</span><figcaption><span class="dot"></span>Signage close-up</figcaption></figure>
+      </div>
+      <div class="note r" style="--d:.6s">Samples from our last session — the direction this room aligned on. Concept renders, not final artwork.</div>
+    </div>
+  </section>
+
+  <!-- 7b MOCKUP TIMELAPSE · HERO -->
+  <section class="slide bg-ink dark hasvideo" data-theme="dark">
+    <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="assets/mockup-timelapse-poster.jpg">
+      <source src="assets/mockup-timelapse.mp4" type="video/mp4">
+    </video>
+    <div class="bgvid-veil" style="background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,.8) 100%)"></div>
+    <div class="wrap" style="margin-top:auto;position:relative;z-index:2">
+      <span class="tag r2 r" style="--d:.1s">The revised identity · in motion</span>
+      <h1 class="r" style="--d:.25s;color:var(--cream);font-size:clamp(34px,5.4vw,86px)">Watch it come <em style="color:var(--yellow)">together</em>.</h1>
+      <p class="lead r" style="--d:.5s;color:var(--cream);max-width:54ch">From the approved blue to the finished mark — here's the new identity taking shape, before we walk through it piece by piece.</p>
+    </div>
+  </section>
+
+  <!-- 8 REVISED LOGO · THE PROPOSED MARK -->
+  <section class="slide bg-white">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Branding Updates · Logo · Revised</div>
+      <h2 class="r" style="--d:.2s">The revised <em>mark</em>.</h2>
+      <p class="lead r" style="--d:.35s">Everything this room approved, resolved into one mark — the red script, carried by the blue line. Proposed lead, with two treatments of the same idea.</p>
+      <div class="markstage r" style="--d:.5s" data-full="assets/logoC-1.jpg" data-cap="Revised mark — proposed lead · blue line, red keyline">
+        <img src="assets/logoC-1.jpg" alt="Revised Julie's mark, blue line with red keyline">
+        <span class="marklbl">Proposed lead — blue line · red keyline</span>
+      </div>
+      <div class="markrow">
+        <figure class="r" style="--d:.62s" data-full="assets/logoC-3.jpg" data-cap="Variation — weighted red"><img src="assets/logoC-3.jpg" alt="Revised mark, weighted red line"><figcaption>Weighted red</figcaption></figure>
+        <figure class="r" style="--d:.72s" data-full="assets/logoC-2.jpg" data-cap="Variation — heritage tricolor"><img src="assets/logoC-2.jpg" alt="Revised mark, red-blue-yellow tricolor line"><figcaption>Heritage tricolor</figcaption></figure>
+      </div>
+      <div class="note r" style="--d:.84s">Click any mark to view full screen.</div>
+    </div>
+  </section>
+
+  <!-- 8b THE MNEMONIC & THE BADGE -->
+  <section class="slide bg-cream">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Branding Updates · Logo · Revised</div>
+      <h2 class="r" style="--d:.2s">The mnemonic<br>&amp; the <em>badge</em>.</h2>
+      <p class="lead r" style="--d:.35s">The line, distilled to its purest form — so recognizable it carries the brand without a single word. The J badge covers the small formats. And one more option: the mnemonic, brought to life.</p>
+      <div class="mnemrow">
+        <figure class="cell r" style="--d:.5s" data-full="assets/mnemonic.jpg" data-cap="Proposed mnemonic — the line, long &amp; short form">
+          <div class="media"><img src="assets/mnemonic.jpg" alt="Proposed mnemonic, blue and red line in long and short forms"></div>
+          <figcaption>Proposed mnemonic — long &amp; short form</figcaption>
+        </figure>
+        <figure class="cell r" style="--d:.62s" data-full="assets/logoC-badge.jpg" data-cap="The J badge — app icon, stamp, small formats">
+          <div class="media"><img src="assets/logoC-badge.jpg" alt="J badge, red script J in circular blue and red rings"></div>
+          <figcaption>The J badge — icon, stamp &amp; small formats</figcaption>
+        </figure>
+        <figure class="cell r" style="--d:.74s">
+          <div class="media"><video autoplay muted loop playsinline preload="auto"><source src="assets/mascot-test.mp4" type="video/mp4"></video></div>
+          <figcaption>Mascot test — animated option</figcaption>
+        </figure>
+      </div>
+      <div class="note r" style="--d:.86s">No word needed — the shape alone says Julie's. That's the test of a mnemonic.</div>
+    </div>
+  </section>
+
+  <!-- 9 TYPOGRAPHY INTRO -->
+  <section class="slide bg-cream">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Section Two · Typography</div>
+      <h2 class="r" style="--d:.22s">Personality, in<br><em>written form</em>.</h2>
+      <p class="lead r" style="--d:.45s">How Julie's speaks when it writes. Beyond working hard across layouts, the type has to carry character while staying effortlessly readable — and we've applied it to packaging, in-store materials, and social posts so you can judge it in the real world, not on a specimen sheet.</p>
+      <div class="finalists">
+        <div class="fin r" style="--d:.6s">
+          <span class="tag">Variation 1</span>
+          <h3 class="blue">Rounded &amp; friendly</h3>
+          <div class="flow">Curved, calm, easygoing — approachable at first glance. Free for commercial use.</div>
+        </div>
+        <div class="fin r" style="--d:.72s">
+          <span class="tag r2">Variation 2</span>
+          <h3 class="red">Impact &amp; visibility</h3>
+          <div class="flow">Built to stand out fast — bolder presence, with readability still protected.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10-14 TYPOGRAPHY V1 BOARDS -->
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-cover.jpg" data-cap="Typography — personality in written form">
+    <div class="boardcap"><span class="sect">Typography</span><span class="name">Overview</span></div>
+    <div class="boardhint">Click to enlarge</div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v1-header.jpg" data-cap="Variation 1 — header font (rounded, friendly)">
+    <div class="boardcap"><span class="sect">Variation 1</span><span class="name">Header font</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v1-subbody.jpg" data-cap="Variation 1 — subtext &amp; body fonts">
+    <div class="boardcap"><span class="sect">Variation 1</span><span class="name">Subtext &amp; body</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v1-guide.jpg" data-cap="Variation 1 — usage guide">
+    <div class="boardcap"><span class="sect">Variation 1</span><span class="name">Usage guide</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v1-sample.jpg" data-cap="Variation 1 — applied sample">
+    <div class="boardcap"><span class="sect">Variation 1</span><span class="name">Applied sample</span></div>
+  </section>
+
+  <!-- 15-19 TYPOGRAPHY V2 BOARDS -->
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v2-header.jpg" data-cap="Variation 2 — header font (impact, visibility)">
+    <div class="boardcap"><span class="sect r2">Variation 2</span><span class="name">Header font</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v2-subtext.jpg" data-cap="Variation 2 — subtext font">
+    <div class="boardcap"><span class="sect r2">Variation 2</span><span class="name">Subtext</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v2-body.jpg" data-cap="Variation 2 — body font">
+    <div class="boardcap"><span class="sect r2">Variation 2</span><span class="name">Body</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v2-guide.jpg" data-cap="Variation 2 — usage guide">
+    <div class="boardcap"><span class="sect r2">Variation 2</span><span class="name">Usage guide</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-v2-sample.jpg" data-cap="Variation 2 — applied sample">
+    <div class="boardcap"><span class="sect r2">Variation 2</span><span class="name">Applied sample</span></div>
+  </section>
+
+  <!-- 20-21 TYPOGRAPHY APPLIED -->
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-app-social.jpg" data-cap="Typography applied — social media &amp; poster">
+    <div class="boardcap"><span class="sect">Applied</span><span class="name">Social media &amp; poster</span></div>
+  </section>
+  <section class="slide board">
+    <img class="bimg expandable" src="assets/type-app-pack.jpg" data-cap="Typography applied — packaging">
+    <div class="boardcap"><span class="sect">Applied</span><span class="name">Packaging</span></div>
+  </section>
+
+  <!-- 22 TAGLINE INTRO -->
+  <section class="slide bg-cream">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Section Three · Tagline Options</div>
+      <h2 class="r" style="--d:.2s">Two finalists.<br>Let's hear them <em>out loud</em>.</h2>
+      <p class="lead r" style="--d:.45s">The list is down to two. So instead of judging words on a page, we've placed each line inside real, everyday moments — and tested Bisaya versions, because this isn't translation. It's checking whether the feeling still lands the way people actually speak in Visayas and Mindanao.</p>
+      <div class="finalists">
+        <div class="fin r" style="--d:.6s">
+          <span class="tag">Route 1</span>
+          <h3 class="blue">"Laging Kasama"</h3>
+          <div class="flow">Consistency &amp; familiarity — Julie's is already part of the daily routine. Breakfast, baon, merienda. There with you, always.</div>
+        </div>
+        <div class="fin r" style="--d:.72s">
+          <span class="tag r2">Route 2</span>
+          <h3 class="red">"Tara, Kain Tayo"</h3>
+          <div class="flow">An invitation, not a statement — the "tara" moment that sparks a shared meal. Bonding, conversation, togetherness.</div>
+        </div>
+      </div>
+      <div class="note r" style="--d:.86s">The question isn't which sounds better — it's which one you can hear in real life, across the country.</div>
+    </div>
+  </section>
+
+  <!-- 23 LAGING KASAMA GALLERY -->
+  <section class="slide bg-white">
+    <div class="wrap">
+      <div class="galhead">
+        <div>
+          <div class="eyebrow r" style="--d:.1s">Tagline · Route 1 of 2</div>
+          <h2 class="r" style="--d:.2s">"Laging Kasama"</h2>
+        </div>
+        <p class="sub r" style="--d:.3s;align-self:flex-end;margin-bottom:8px">Always there with you — the steady, familiar moments.</p>
+      </div>
+      <div class="gallery g6" data-gallery="lk">
+        <figure class="gcell" data-full="assets/lk-handaan.jpg" data-cap="Laging Kasama sa handaan"><img src="assets/lk-handaan.jpg" alt="Laging Kasama sa handaan"><span class="expand">⤢</span><figcaption><span class="dot"></span>Sa handaan</figcaption></figure>
+        <figure class="gcell" data-full="assets/lk-pamilya.jpg" data-cap="Laging Kasama sa pamilya"><img src="assets/lk-pamilya.jpg" alt="Laging Kasama sa pamilya"><span class="expand">⤢</span><figcaption><span class="dot"></span>Sa pamilya</figcaption></figure>
+        <figure class="gcell" data-full="assets/lk-biyahe.jpg" data-cap="Laging Kasama sa biyahe"><img src="assets/lk-biyahe.jpg" alt="Laging Kasama sa biyahe"><span class="expand">⤢</span><figcaption><span class="dot"></span>Sa biyahe</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/lk-chikahan.jpg" data-cap="Kauban Kanunay sa chikahan (Bisaya)"><img src="assets/lk-chikahan.jpg" alt="Kauban Kanunay sa chikahan"><span class="expand">⤢</span><figcaption><span class="dot"></span>Kauban Kanunay sa chikahan</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/lk-outing.jpg" data-cap="Kauban Kanunay sa outing (Bisaya)"><img src="assets/lk-outing.jpg" alt="Kauban Kanunay sa outing"><span class="expand">⤢</span><figcaption><span class="dot"></span>Kauban Kanunay sa outing</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/lk-breaktime.jpg" data-cap="Kauban Kanunay sa break time (Bisaya)"><img src="assets/lk-breaktime.jpg" alt="Kauban Kanunay sa break time"><span class="expand">⤢</span><figcaption><span class="dot"></span>Kauban Kanunay sa break time</figcaption></figure>
+      </div>
+      <div class="leg r" style="--d:.6s"><span><i style="background:var(--blue)"></i>Tagalog</span><span><i style="background:var(--orange)"></i>Bisaya adaptation</span></div>
+    </div>
+  </section>
+
+  <!-- 24 TARA KAIN TAYO GALLERY -->
+  <section class="slide bg-white">
+    <div class="wrap">
+      <div class="galhead">
+        <div>
+          <div class="eyebrow r" style="--d:.1s">Tagline · Route 2 of 2</div>
+          <h2 class="r" style="--d:.2s">"Tara, Kain Tayo"</h2>
+        </div>
+        <p class="sub r" style="--d:.3s;align-self:flex-end;margin-bottom:8px">The invitation — that "tara" moment before anything starts.</p>
+      </div>
+      <div class="gallery g7" data-gallery="tk">
+        <figure class="gcell" data-full="assets/tk-trabaho.jpg" data-cap="Tara, Kain Tayo bago magtrabaho"><img src="assets/tk-trabaho.jpg" alt="Tara Kain Tayo bago magtrabaho"><span class="expand">⤢</span><figcaption><span class="dot"></span>Bago magtrabaho</figcaption></figure>
+        <figure class="gcell" data-full="assets/tk-barkada.jpg" data-cap="Tara, Kain Tayo kasama ang barkada"><img src="assets/tk-barkada.jpg" alt="Tara Kain Tayo kasama ang barkada"><span class="expand">⤢</span><figcaption><span class="dot"></span>Kasama ang barkada</figcaption></figure>
+        <figure class="gcell" data-full="assets/tk-pamilya.jpg" data-cap="Tara, Kain Tayo sama ang pamilya"><img src="assets/tk-pamilya.jpg" alt="Tara Kain Tayo sama ang pamilya"><span class="expand">⤢</span><figcaption><span class="dot"></span>Sama ang pamilya</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/tk-biyahe.jpg" data-cap="Tara, Mangaon Ta una mo biyahe (Bisaya)"><img src="assets/tk-biyahe.jpg" alt="Tara Mangaon Ta una mo biyahe"><span class="expand">⤢</span><figcaption><span class="dot"></span>Mangaon Ta · una mo biyahe</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/tk-duty.jpg" data-cap="Tara, Mangaon Ta una mag-duty (Bisaya)"><img src="assets/tk-duty.jpg" alt="Tara Mangaon Ta una mag-duty"><span class="expand">⤢</span><figcaption><span class="dot"></span>Mangaon Ta · una mag-duty</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/tk-mpamilya.jpg" data-cap="Tara, Mangaon Ta uban sa pamilya (Bisaya)"><img src="assets/tk-mpamilya.jpg" alt="Tara Mangaon Ta uban sa pamilya"><span class="expand">⤢</span><figcaption><span class="dot"></span>Mangaon Ta · uban sa pamilya</figcaption></figure>
+        <figure class="gcell bis" data-full="assets/tk-skwela.jpg" data-cap="Tara, Mangaon Ta una mo skwela (Bisaya)"><img src="assets/tk-skwela.jpg" alt="Tara Mangaon Ta una mo skwela"><span class="expand">⤢</span><figcaption><span class="dot"></span>Mangaon Ta · una mo skwela</figcaption></figure>
+      </div>
+      <div class="leg r" style="--d:.6s"><span><i style="background:var(--blue)"></i>Tagalog</span><span><i style="background:var(--orange)"></i>Bisaya adaptation</span></div>
+    </div>
+  </section>
+
+  <!-- 25 THE REFINEMENT · TARA, MERIENDA TAYO -->
+  <section class="slide bg-cream">
+    <div class="wrap grid2">
+      <div>
+        <div class="eyebrow r" style="--d:.1s">Tagline · One refinement</div>
+        <span class="tag y r" style="--d:.15s">New this week</span>
+        <h2 class="r" style="--d:.2s">"Tara, <em>Merienda</em> Tayo"</h2>
+        <p class="lead r" style="--d:.4s">One honest catch with "kain" and "mangaon": they can read as a full meal. "Merienda" keeps the exact same invitation — but names the occasion Julie's actually owns. Bread, pastries, coffee breaks, afternoon snacks.</p>
+        <p class="sub r" style="--d:.55s;margin-top:14px">Same warmth, same "tara" — more ownable for a bakeshop. Two further product-led lines are held in reserve if the room wants to see them.</p>
+      </div>
+      <div class="imgcard zoom" style="--d:.45s;cursor:zoom-in" data-full="assets/pivot-merienda.jpg" data-cap="Tara, Merienda Tayo">
+        <img src="assets/pivot-merienda.jpg" alt="Tara Merienda Tayo key visual">
+      </div>
+    </div>
+  </section>
+
+  <!-- 26 THE DECISION -->
+  <section class="slide bg-cream">
+    <div class="wrap">
+      <div class="eyebrow r" style="--d:.1s">Section Four · The Decision</div>
+      <h2 class="r" style="--d:.2s">What we need from<br>this room <em>today</em>.</h2>
+      <div class="reqcards">
+        <div class="req r" style="--d:.42s"><div class="ic">✍️</div><h3>The tagline</h3><p>Route 1, Route 2, or the merienda refinement — which one do you hear the country saying?</p></div>
+        <div class="req r" style="--d:.54s"><div class="ic">🔤</div><h3>The typography</h3><p>Variation 1 (rounded &amp; friendly) or Variation 2 (impact &amp; visibility) — or a role for each.</p></div>
+        <div class="req r" style="--d:.66s"><div class="ic">🔵</div><h3>The mark</h3><p>Approve the revised logo — the proposed lead, or one of its two treatments — plus the mnemonic and badge.</p></div>
+      </div>
+      <div class="askbar r" style="--d:.82s"><span class="q">Lock these three today</span> and the new identity goes straight into production.</div>
+    </div>
+  </section>
+
+  <!-- 27 CLOSE -->
+  <section class="slide bg-blue dark hasvideo" data-theme="dark">
+    <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="assets/ending-poster.jpg">
+      <source src="assets/ending-video.mp4" type="video/mp4">
+    </video>
+    <div class="bgvid-veil"></div>
+    <div class="wrap" style="text-align:center;align-items:center;display:flex;flex-direction:column">
+      <div class="eyebrow r" style="--d:.1s;color:var(--yellow)">Paprika × Julie's · Execom Presentation</div>
+      <h1 class="r" style="--d:.25s;color:var(--cream)">Salamat.</h1>
+      <p class="lead r" style="--d:.55s;color:var(--cream)">Next — the new identity, out in the world.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <span class="lb-count" id="lbCount"></span>
+  <button class="lb-btn prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <img id="lbImg" alt="Expanded view">
+  <button class="lb-btn next" id="lbNext" aria-label="Next">&#8250;</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const dotsWrap=document.getElementById('dots');
+const prog=document.getElementById('prog');
+const cur=document.getElementById('cur'),tot=document.getElementById('tot');
+let i=0;tot.textContent=String(slides.length).padStart(2,'0');
+slides.forEach((s,n)=>{const b=document.createElement('button');b.onclick=()=>go(n);dotsWrap.appendChild(b)});
+const dots=[...dotsWrap.children];
+function syncTheme(){document.body.classList.toggle('dark',slides[i].dataset.theme==='dark')}
+function go(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+  cur.textContent=String(i+1).padStart(2,'0');
+  prog.style.width=((i+1)/slides.length*100)+'%';
+  syncTheme();
+  slides.forEach((s,k)=>{s.querySelectorAll('video').forEach(v=>{
+    k===i ? (v.play&&v.play().catch(()=>{})) : (v.pause&&v.pause()); })});
+  requestAnimationFrame(()=>fit(slides[i]));
+  setTimeout(()=>fit(slides[i]),120);
+}
+/* auto-fit: scale a slide's content down so it never overflows a 16:9 frame */
+function fit(slide){
+  const wrap=slide.querySelector('.wrap');
+  if(!wrap)return;
+  wrap.style.transform='none';
+  const cs=getComputedStyle(slide);
+  const availH=slide.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  const availW=slide.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const needH=wrap.scrollHeight,needW=wrap.scrollWidth;
+  const s=Math.min(1,availH/needH,availW/needW);
+  wrap.style.transformOrigin='center center';
+  wrap.style.transform=s<0.999?('scale('+s.toFixed(4)+')'):'none';
+}
+addEventListener('resize',()=>fit(slides[i]));
+addEventListener('load',()=>fit(slides[i]));
+/* refit when images finish loading (large assets load after go() has already measured) */
+document.querySelectorAll('.slide img').forEach(im=>{
+  if(!im.complete)im.addEventListener('load',()=>fit(slides[i]));
+});
+
+/* ---------- lightbox with gallery navigation ---------- */
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),
+  lbCap=document.getElementById('lbCap'),lbCount=document.getElementById('lbCount'),
+  lbPrev=document.getElementById('lbPrev'),lbNext=document.getElementById('lbNext'),
+  lbClose=document.getElementById('lbClose');
+let lbList=[],lbIdx=0;
+function openLb(list,idx){
+  lbList=list;lbIdx=idx;renderLb();lb.classList.add('on');
+}
+function renderLb(){
+  const it=lbList[lbIdx];
+  lbImg.src=it.full;lbCap.textContent=it.cap||'';
+  if(lbList.length>1){lbCount.textContent=(lbIdx+1)+' / '+lbList.length;
+    lbPrev.classList.remove('hide');lbNext.classList.remove('hide');lbCount.style.display='';}
+  else{lbCount.style.display='none';lbPrev.classList.add('hide');lbNext.classList.add('hide');}
+}
+function lbStep(d){lbIdx=(lbIdx+d+lbList.length)%lbList.length;renderLb();}
+function closeLb(){lb.classList.remove('on');lbList=[];}
+lbPrev.onclick=e=>{e.stopPropagation();lbStep(-1)};
+lbNext.onclick=e=>{e.stopPropagation();lbStep(1)};
+lbClose.onclick=e=>{e.stopPropagation();closeLb()};
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+
+/* wire galleries: each .gallery is a scoped list */
+document.querySelectorAll('.gallery').forEach(g=>{
+  const cells=[...g.querySelectorAll('.gcell')];
+  const list=cells.map(c=>({full:c.dataset.full,cap:c.dataset.cap}));
+  cells.forEach((c,idx)=>c.addEventListener('click',()=>openLb(list,idx)));
+});
+/* wire single expandables (board slides) */
+document.querySelectorAll('.expandable').forEach(img=>{
+  img.addEventListener('click',()=>openLb([{full:img.currentSrc||img.src,cap:img.dataset.cap||''}],0));
+});
+document.querySelectorAll('[data-full]:not(.gcell)').forEach(el=>{
+  el.addEventListener('click',()=>openLb([{full:el.dataset.full,cap:el.dataset.cap||''}],0));
+});
+
+/* ---------- navigation ---------- */
+function deckNext(){go(i+1)} function deckPrev(){go(i-1)}
+document.addEventListener('keydown',e=>{
+  if(lb.classList.contains('on')){
+    if(e.key==='Escape')closeLb();
+    else if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();if(lbList.length>1)lbStep(1)}
+    else if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();if(lbList.length>1)lbStep(-1)}
+    return;
+  }
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();deckNext()}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();deckPrev()}
+  else if(e.key==='Home')go(0); else if(e.key==='End')go(slides.length-1);
+  else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+});
+let x0=null;
+addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;
+  if(Math.abs(dx)>50){if(lb.classList.contains('on')){if(lbList.length>1)lbStep(dx<0?1:-1)}else{dx<0?deckNext():deckPrev()}}x0=null},{passive:true});
+
+go(0);
+</script>
+</body>
+</html>
