@@ -18,13 +18,22 @@ h1 span{color:var(--red)}
 .sub{color:var(--muted);font-size:15px;margin-bottom:8px}
 .conf{display:inline-block;background:var(--deep);color:var(--mellow);font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin:14px 0 40px}
 .sec{font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);margin:36px 0 14px;border-bottom:2px solid var(--line);padding-bottom:8px}
+.rows{display:flex;flex-direction:column;gap:10px}
+a.row{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 22px;text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .15s}
+a.row:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(78,54,34,.14);border-color:var(--orange)}
+a.row.latest{border:2px solid var(--red)}
+.d{font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;color:var(--deepred);min-width:104px}
+.n{font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;line-height:1.25;flex:1}
+.n small{display:block;font-family:'Varela Round',sans-serif;font-weight:400;font-size:12.5px;color:var(--muted);margin-top:2px}
+.tag{font-family:'Poppins',sans-serif;font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:var(--mellow);color:var(--deep);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.tag.hot{background:var(--red);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
 a.card{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .15s}
 a.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(78,54,34,.14);border-color:var(--orange)}
-.date{font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
-.name{font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;margin:6px 0 4px;line-height:1.25}
+.name{font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;margin:0 0 4px;line-height:1.25}
 .desc{font-size:13px;color:var(--muted);line-height:1.45}
 footer{margin-top:56px;font-size:12px;color:var(--muted)}
+@media(max-width:560px){a.row{flex-wrap:wrap;gap:6px}.d{min-width:0}}
 </style>
 </head>
 <body>
@@ -34,23 +43,23 @@ footer{margin-top:56px;font-size:12px;color:var(--muted)}
   <div class="sub">Brand refresh presentations &amp; alignment decks</div>
   <div class="conf">Confidential — For Julie's Franchise Corp review only</div>
 
-  <div class="sec">Weekly Alignment Decks</div>
-  <div class="grid">
-    <a class="card" href="july-16/"><div class="date">July 16, 2026</div><div class="name">Tagline Decision Meeting</div><div class="desc">Tagline direction, updated logos, packaging &amp; facade applications.</div></a>
-    <a class="card" href="july-9/"><div class="date">July 9, 2026</div><div class="name">Weekly Alignment</div><div class="desc">Logo Drafts B, typography V1, mascot progress.</div></a>
-    <a class="card" href="execom-july-6/"><div class="date">July 6, 2026</div><div class="name">Execom Presentation</div><div class="desc">Taglines, typography V1+V2, logo direction for the executive committee.</div></a>
-    <a class="card" href="week-4/"><div class="date">July 2, 2026</div><div class="name">Week 4 Deck</div><div class="desc">Logo studies, typography, iconography &amp; store applications.</div></a>
-    <a class="card" href="week-3/"><div class="date">June 25, 2026</div><div class="name">Week 3 Deck</div><div class="desc">Brand tests, creative design tests, logo test V2.</div></a>
-    <a class="card" href="week-2/"><div class="date">June 18, 2026</div><div class="name">Week 2 Deck</div><div class="desc">Early direction &amp; brand foundations.</div></a>
+  <div class="sec">Meetings — Newest First</div>
+  <div class="rows">
+    <a class="row latest" href="2026-07-16/"><span class="d">Jul 16, 2026</span><span class="n">Weekly Alignment — Tagline Decision<small>Tagline direction, updated logos, packaging &amp; facade applications</small></span><span class="tag hot">Latest</span></a>
+    <a class="row" href="2026-07-09/"><span class="d">Jul 09, 2026</span><span class="n">Weekly Alignment — Logo &amp; Typography<small>Logo Drafts B, typography V1, mascot progress</small></span><span class="tag">Weekly</span></a>
+    <a class="row" href="2026-07-06/"><span class="d">Jul 06, 2026</span><span class="n">Execom Presentation<small>Taglines, typography V1+V2, logo direction for the executive committee</small></span><span class="tag">Execom</span></a>
+    <a class="row" href="2026-07-02/"><span class="d">Jul 02, 2026</span><span class="n">Weekly Alignment — Studies &amp; Applications<small>Logo studies, typography, iconography &amp; store applications</small></span><span class="tag">Weekly</span></a>
+    <a class="row" href="2026-06-25/"><span class="d">Jun 25, 2026</span><span class="n">Weekly Alignment — Brand Tests<small>Brand tests, creative design tests, logo test V2</small></span><span class="tag">Weekly</span></a>
+    <a class="row" href="2026-06-18/"><span class="d">Jun 18, 2026</span><span class="n">Weekly Alignment — Early Direction<small>Early direction &amp; brand foundations</small></span><span class="tag">Weekly</span></a>
   </div>
 
-  <div class="sec">Strategy &amp; Foundations</div>
+  <div class="sec">Foundations &amp; Strategy</div>
   <div class="grid">
-    <a class="card" href="foundational-pitch.html"><div class="date">Foundational</div><div class="name">Foundational Pitch (V4)</div><div class="desc">Tita Julie &amp; the Tinapay ng Bayan — the strategic core.</div></a>
-    <a class="card" href="seven-foundations/"><div class="date">Foundational</div><div class="name">Seven Foundations Deck</div><div class="desc">The seven pillars of the refreshed brand.</div></a>
-    <a class="card" href="pitch/"><div class="date">Foundational</div><div class="name">Pitch Website</div><div class="desc">Interactive pitch site experience.</div></a>
-    <a class="card" href="content-pillars.html"><div class="date">Guide</div><div class="name">Content Pillars Visual Guide</div><div class="desc">Social content pillar framework.</div></a>
-    <a class="card" href="competitive-landscape.html"><div class="date">Research</div><div class="name">Competitive Landscape</div><div class="desc">Category &amp; competitor mapping.</div></a>
+    <a class="card" href="foundations/pitch/"><div class="name">Foundational Pitch (V4)</div><div class="desc">Tita Julie &amp; the Tinapay ng Bayan — the strategic core.</div></a>
+    <a class="card" href="foundations/seven-foundations/"><div class="name">Seven Foundations Deck</div><div class="desc">The seven pillars of the refreshed brand.</div></a>
+    <a class="card" href="foundations/pitch-website/"><div class="name">Pitch Website</div><div class="desc">Interactive pitch site experience.</div></a>
+    <a class="card" href="foundations/content-pillars/"><div class="name">Content Pillars Visual Guide</div><div class="desc">Social content pillar framework.</div></a>
+    <a class="card" href="foundations/competitive-landscape/"><div class="name">Competitive Landscape</div><div class="desc">Category &amp; competitor mapping.</div></a>
   </div>
 
   <footer>© 2026 Paprika Studio · Prepared for Julie's Franchise Corp. Do not distribute.</footer>

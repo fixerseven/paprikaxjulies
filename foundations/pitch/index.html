@@ -1,0 +1,406 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paprika × Julie's Bakeshop — Visual Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#FF0000; --deep:#4E3622; --deepred:#AF1F24;
+  --yellow:#FFE400; --orange:#F9992F; --beige:#FFE3C5; --mellow:#FAF494;
+  --ink:#222223; --muted:#8B7355; --line:#F0D9B8;
+  --disp:'Poppins',system-ui,sans-serif; --body:'Varela Round','Poppins',system-ui,sans-serif; --mono:'Poppins',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;width:100%;overflow:hidden;background:#2a1a0e;font-family:var(--body);color:var(--ink)}
+.deck{height:100vh;width:100vw;position:relative}
+
+/* grain overlay */
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.04;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* slides */
+.slide{position:absolute;inset:0;display:flex;opacity:0;visibility:hidden;
+  transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);transform:scale(1.02);padding:6.5vh 7vw}
+.slide.active{opacity:1;visibility:visible;transform:scale(1);z-index:2}
+.slide.past{transform:scale(.985)}
+
+/* reveal animation system */
+.r{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+.active .r{opacity:1;transform:none;transition-delay:var(--d,0s)}
+.r.blur{filter:blur(8px)}.active .r.blur{filter:blur(0)}
+
+/* eyebrow */
+.eye{font-family:var(--mono);font-size:clamp(10px,1vw,13px);letter-spacing:.32em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.7em;font-weight:600}
+.eye::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);display:inline-block}
+.on-dark .eye{color:var(--yellow)}.on-dark .eye::before{background:var(--yellow)}
+
+h1,h2{font-family:var(--disp);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.kicker{font-family:var(--disp);font-style:italic;font-weight:400}
+
+/* image placeholder */
+.ph{position:relative;overflow:hidden;background:
+   radial-gradient(120% 120% at 30% 20%, rgba(255,228,0,.16), transparent 60%),
+   linear-gradient(135deg,#ffe8a0,#ffd97a);border:2px dashed rgba(175,31,36,.35);border-radius:14px;
+   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--deepred);gap:.5rem;background-size:cover;background-position:center}
+.ph .cam{width:46px;height:46px;opacity:.6}
+.ph .pl-eye{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;opacity:.7;font-weight:600}
+.ph .pl-txt{font-family:var(--body);font-size:clamp(12px,1.15vw,15px);max-width:78%;line-height:1.35;font-weight:500}
+.ph.kb{animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.scrim{position:absolute;inset:0}
+
+/* nav */
+.bar{position:fixed;top:0;left:0;height:4px;background:var(--red);z-index:70;transition:width .5s ease}
+.dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:11px;z-index:70}
+.dots button{width:9px;height:9px;border-radius:50%;border:none;background:rgba(78,54,34,.28);cursor:pointer;transition:.3s;padding:0}
+.dots button.on{background:var(--red);transform:scale(1.35)}
+.on-dark-nav .dots button{background:rgba(255,255,255,.3)}
+.nav-arrow{position:fixed;bottom:18px;z-index:70;background:none;border:none;cursor:pointer;color:var(--red);font-size:26px;opacity:.55;transition:.25s;font-family:var(--body)}
+.nav-arrow:hover{opacity:1}
+#prevBtn{right:74px}#nextBtn{right:34px}
+.fs{position:fixed;top:16px;right:20px;z-index:70;background:rgba(34,34,35,.4);border:1px solid rgba(255,255,255,.3);color:#FFF5D6;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:7px 12px;border-radius:20px;cursor:pointer;text-transform:uppercase;font-weight:600}
+
+/* ===== SLIDE 1 COVER ===== */
+#s1{background:var(--deep)}
+#s1 .hero{position:absolute;inset:0}
+#s1 .hero .ph{height:100%;width:100%;border:none;border-radius:0;background:
+   radial-gradient(140% 120% at 70% 10%, rgba(255,0,0,.4), transparent 55%),
+   linear-gradient(160deg,#6b3018,#3a1c0d)}
+#s1 .hero .scrim{background:linear-gradient(90deg, rgba(48,28,13,.88) 0%, rgba(48,28,13,.55) 55%, rgba(48,28,13,.25) 100%)}
+#s1 .wrap{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;height:100%}
+#s1 .mark{font-family:var(--disp);font-weight:800;color:#fff;line-height:.96;letter-spacing:-.02em}
+#s1 .mark .p{font-size:clamp(56px,11vw,150px);display:block}
+#s1 .mark .x{font-size:clamp(20px,2.4vw,34px);color:var(--yellow);display:inline-block;margin:0 0 .35em 0;font-style:italic;font-weight:400}
+#s1 .mark .j{font-size:clamp(30px,5.4vw,74px);font-weight:300;font-style:italic;color:var(--beige)}
+#s1 .tag{font-family:var(--disp);font-style:italic;font-weight:300;color:#FFF5D6;font-size:clamp(18px,2.5vw,34px);max-width:18ch;margin-top:3.4vh;line-height:1.18}
+#s1 .foot{font-family:var(--mono);color:#E9C49E;font-size:clamp(10px,1vw,13px);letter-spacing:.2em;text-transform:uppercase;margin-top:5vh;font-weight:500}
+
+/* ===== content base ===== */
+.light{background:var(--beige)}
+.light::after{content:"";position:absolute;inset:0;background:radial-gradient(100% 80% at 85% 15%, rgba(255,228,0,.10), transparent 55%);pointer-events:none}
+.col{display:flex;flex-direction:column;justify-content:center;height:100%;position:relative;z-index:2}
+
+/* ===== SLIDE 2 STAKES ===== */
+#s2 .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:5vw;height:100%;align-items:center}
+#s2 h1{font-size:clamp(48px,9vw,128px)}
+#s2 .beloved{color:var(--ink)}
+#s2 .fading{color:transparent;-webkit-text-stroke:2px var(--red);opacity:.9}
+#s2 .lede{font-size:clamp(15px,1.5vw,20px);color:#5a4530;max-width:30ch;margin-top:3vh;line-height:1.4}
+#s2 .statchip{margin-top:4vh;display:flex;align-items:baseline;gap:.6rem}
+#s2 .statchip .num{font-family:var(--disp);font-weight:800;color:var(--red);font-size:clamp(44px,6vw,86px);line-height:1}
+#s2 .statchip .lbl{font-size:clamp(13px,1.2vw,17px);color:#5a4530;max-width:20ch;line-height:1.3}
+#s2 .ph{height:64vh}
+.words{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.words span{position:absolute;font-family:var(--disp);font-style:italic;color:rgba(175,31,36,.08);white-space:nowrap}
+#s2 .ph{position:relative;z-index:2}
+
+/* ===== SLIDE 3 IDEA ===== */
+#s3{background:var(--deepred)}
+#s3 .ph.bg{position:absolute;inset:0;border:none;border-radius:0;background:
+   radial-gradient(120% 120% at 50% 120%, rgba(255,228,0,.25), transparent 60%),
+   linear-gradient(180deg,#c0282e,#7a1518)}
+#s3 .scrim{background:linear-gradient(180deg, rgba(90,12,14,.45), rgba(90,12,14,.7))}
+#s3 .col{align-items:center;text-align:center;z-index:3}
+#s3 .eye{color:var(--yellow);justify-content:center}
+#s3 h1{color:#fff;font-size:clamp(40px,8vw,118px);margin-top:2vh}
+#s3 h1 .nk{display:block;font-style:italic;font-weight:300;color:var(--yellow);font-size:.62em;margin-top:.15em}
+#s3 .chips{display:flex;gap:1.1rem;margin-top:5vh;flex-wrap:wrap;justify-content:center}
+#s3 .chip{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:clamp(11px,1.1vw,14px);font-weight:600;
+  color:#fff;border:1px solid rgba(255,228,0,.5);padding:.7em 1.25em;border-radius:40px;background:rgba(255,228,0,.08)}
+
+/* ===== SLIDE 4 AUDIENCE ===== */
+#s4 .col{justify-content:flex-start}
+#s4 h1{font-size:clamp(30px,4.6vw,62px);margin-top:.4vh}
+#s4 .personas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.2vw;align-items:end;margin-top:3.2vh}
+#s4 .pcard{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+#s4 .pcard .ph{width:100%;aspect-ratio:4/4.4;border-radius:50% 50% 14px 14px}
+#s4 .pcard.center .ph{outline:4px solid var(--red);outline-offset:4px;transform:translateY(-14px)}
+#s4 .pname{font-family:var(--disp);font-weight:700;font-size:clamp(18px,2vw,28px);color:var(--ink)}
+#s4 .pname b{display:block;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.2em}
+#s4 .pcard.center .pname{color:var(--red)}
+#s4 .bridge{font-family:var(--disp);font-style:italic;color:var(--orange);text-align:center;font-size:clamp(14px,1.5vw,21px);margin-top:1vh;font-weight:400}
+#s4 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5vw;margin-top:3vh;border-top:1px solid var(--line);padding-top:2.4vh}
+#s4 .stat .num{font-family:var(--disp);font-weight:800;line-height:.9;font-size:clamp(40px,5.4vw,80px)}
+#s4 .stat:nth-child(1) .num{color:var(--red)}
+#s4 .stat:nth-child(2) .num{color:var(--yellow)}
+#s4 .stat:nth-child(3) .num{color:var(--orange)}
+#s4 .stat .lbl{font-size:clamp(12px,1.1vw,15px);color:#5a4530;line-height:1.3;margin-top:.4em;max-width:22ch}
+#s4 .jolli{margin-top:2.6vh;font-size:clamp(13px,1.3vw,18px);color:var(--ink)}
+#s4 .jolli b{color:var(--red)}
+
+/* ===== SLIDE 5 PLAN ===== */
+#s5 h1{font-size:clamp(34px,5vw,68px)}
+#s5 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8vw;margin-top:4vh}
+#s5 .card{background:#fff;border-radius:16px;padding:2.2vh 1.7vw;box-shadow:0 16px 40px rgba(78,54,34,.10);position:relative;overflow:hidden}
+#s5 .card .top{height:7px;position:absolute;top:0;left:0;right:0}
+#s5 .card:nth-child(1) .top{background:var(--red)}#s5 .card:nth-child(2) .top{background:var(--yellow)}#s5 .card:nth-child(3) .top{background:var(--orange)}
+#s5 .badge{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;color:#fff;font-size:30px;margin:1vh 0 1.6vh}
+#s5 .card:nth-child(1) .badge{background:var(--red)}#s5 .card:nth-child(2) .badge{background:var(--yellow);color:var(--ink)}#s5 .card:nth-child(3) .badge{background:var(--orange)}
+#s5 .role{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--muted);font-weight:600}
+#s5 .ctitle{font-family:var(--disp);font-weight:700;font-size:clamp(19px,2vw,28px);margin:.3em 0 .5em;color:var(--ink);line-height:1.05}
+#s5 .cmeta{font-family:var(--mono);font-size:12px;color:var(--ink);margin-top:1.2vh;font-weight:500}
+#s5 .tagline{margin-top:4vh;font-family:var(--disp);font-style:italic;font-size:clamp(16px,1.8vw,26px);color:var(--deepred);font-weight:400}
+#s5 .tagline b{font-style:normal;color:var(--red);font-weight:700}
+
+/* ===== SLIDE 6 ROADMAP ===== */
+#s6 h1{font-size:clamp(32px,4.8vw,64px)}
+#s6 .tl{margin-top:5vh;position:relative}
+#s6 .months{display:grid;grid-template-columns:repeat(6,1fr);margin-left:14%}
+#s6 .months span{font-family:var(--mono);font-size:clamp(11px,1.1vw,14px);letter-spacing:.12em;color:var(--muted);text-align:center;font-weight:600}
+#s6 .track{position:relative;margin-top:2vh;height:34vh}
+#s6 .gl{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+#s6 .lab{position:absolute;left:0;width:13%;text-align:right;font-family:var(--disp);font-weight:700;font-size:clamp(13px,1.25vw,18px);color:var(--ink);padding-right:1.4%;line-height:1.05}
+#s6 .lab small{display:block;font-weight:500;color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.04em;margin-top:.25em}
+#s6 .tlbar{position:absolute;height:54px;border-radius:9px;transform-origin:left center;transform:scaleX(0);
+  transition:transform 1.1s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;padding:0 16px;color:#fff;box-shadow:0 8px 22px rgba(78,54,34,.18)}
+#s6.active .tlbar{transform:scaleX(1)}
+#s6 .tlbar b{font-size:clamp(12px,1.1vw,15px);opacity:0;transition:opacity .4s ease .7s}
+#s6.active .tlbar b{opacity:1}
+#s6 .kick{position:absolute;top:-3px;width:14px;height:14px;border-radius:50%;background:var(--deep);transform:translateX(-50%)}
+#s6 .note{margin-top:3vh;background:#fff;border-radius:14px;border-left:6px solid var(--orange);padding:2.2vh 2vw;box-shadow:0 14px 34px rgba(78,54,34,.08);font-size:clamp(13px,1.3vw,18px);color:#5a4530;max-width:62ch}
+#s6 .note b{color:var(--orange)}
+
+/* ===== SLIDE 7 ASK ===== */
+#s7{background:var(--deep);color:#fff}
+#s7 .col{z-index:3}
+#s7 .eye{color:var(--yellow)}
+#s7 h1{color:#fff;font-size:clamp(28px,4vw,54px);max-width:20ch}
+#s7 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4vw;margin-top:3.6vh}
+#s7 .kpi{border-top:3px solid var(--yellow);padding-top:1.4vh}
+#s7 .kpi .num{font-family:var(--disp);font-weight:800;font-size:clamp(40px,5.6vw,84px);line-height:.92;color:#fff}
+#s7 .kpi .lbl{color:#F0C9B5;font-size:clamp(12px,1.1vw,15px);margin-top:.5em;max-width:24ch;line-height:1.3}
+#s7 .asks{display:flex;gap:2.4vw;margin-top:4.5vh;flex-wrap:wrap}
+#s7 .ask{display:flex;align-items:center;gap:.8rem}
+#s7 .ask .n{width:38px;height:38px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700}
+#s7 .ask .t{color:#FFF5D6;font-size:clamp(13px,1.15vw,16px);max-width:18ch;line-height:1.2}
+#s7 .close{margin-top:4.5vh;font-family:var(--disp);font-style:italic;font-weight:300;color:var(--yellow);font-size:clamp(18px,2.4vw,36px)}
+
+.cam svg{width:100%;height:100%}
+@media (max-width:780px){.slide{padding:5vh 6vw}#s2 .grid,#s4 .personas,#s4 .stats,#s5 .cards,#s7 .kpis{grid-template-columns:1fr;gap:2vh}#s2 .ph{height:30vh}}
+</style>
+
+<div class="bar" id="bar"></div>
+<button class="fs" id="fsBtn">⤢ Fullscreen</button>
+<div class="grain"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ============ SLIDE 1 — COVER ============ -->
+  <section class="slide on-dark" id="s1">
+    <div class="hero"><div class="ph kb" id="heroImg" data-suggest="Hero: golden-hour Julie's storefront, or steam rising off fresh-from-the-oven pandesal"><div class="scrim"></div></div></div>
+    <div class="wrap">
+      <div class="eye r" style="--d:.1s">Foundational Alignment · Confidential</div>
+      <div class="mark" style="margin-top:2.5vh">
+        <span class="p r blur" style="--d:.25s">Paprika</span>
+        <span><span class="x r" style="--d:.5s">✕</span> <span class="j r" style="--d:.62s">Julie's Bakeshop</span></span>
+      </div>
+      <div class="tag r" style="--d:.9s">You know the bread.<br>We're here to help the country fall in love with it again.</div>
+      <div class="foot r" style="--d:1.15s">For the Board · the CEO · Regional Partners — June 2026</div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2 — STAKES ============ -->
+  <section class="slide light" id="s2">
+    <div class="words" aria-hidden="true">
+      <span style="top:12%;left:55%;font-size:5vw">familiar</span>
+      <span style="top:40%;left:62%;font-size:7vw">tinapay</span>
+      <span style="top:70%;left:50%;font-size:4vw">everywhere</span>
+      <span style="top:84%;left:66%;font-size:6vw">nostalgia</span>
+    </div>
+    <div class="grid">
+      <div class="col">
+        <div class="eye r" style="--d:.05s">The Stakes</div>
+        <h1 style="margin-top:2vh">
+          <span class="beloved r" style="--d:.15s">Beloved.</span><br>
+          <span class="fading r" style="--d:.45s">But fading.</span>
+        </h1>
+        <p class="lede r" style="--d:.7s">Fifty years. A thousand stores. A name every family grew up with — that the youngest generation no longer knows.</p>
+        <div class="statchip r" style="--d:.9s">
+          <span class="num" data-count="81" data-suffix="%">0%</span>
+          <span class="lbl">already buy several times a week. The love is here — the visibility isn't.</span>
+        </div>
+      </div>
+      <div class="ph kb r blur" style="--d:.35s" data-suggest="Nostalgic warmth: hands tearing fresh pandesal, steam rising; or a family sharing bread at the table">
+        <div class="cam">📷</div><div class="pl-eye">Image</div>
+        <div class="pl-txt">Hands tearing warm pandesal — or a family at the table sharing bread</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3 — THE IDEA ============ -->
+  <section class="slide on-dark" id="s3">
+    <div class="ph bg kb" id="ideaBg" data-suggest="Full-bleed: a generous overhead spread of Julie's breads, or the Tita Julie mascot reimagined, warmly lit"><div class="scrim"></div></div>
+    <div class="col">
+      <div class="eye r" style="--d:.1s">The Idea</div>
+      <h1 class="r blur" style="--d:.3s">Tinapay ng Bayan<span class="nk">Ngayon at Kailanman.</span></h1>
+      <div class="chips">
+        <span class="chip r" style="--d:.7s">Warm</span>
+        <span class="chip r" style="--d:.82s">Familiar</span>
+        <span class="chip r" style="--d:.94s">Wais</span>
+        <span class="chip r" style="--d:1.06s">Modern</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4 — AUDIENCE ============ -->
+  <section class="slide light" id="s4">
+    <div class="col">
+      <div class="eye r" style="--d:.05s">The Audience</div>
+      <h1 class="r" style="--d:.15s">One voice — the whole country.</h1>
+      <div class="personas">
+        <div class="pcard r" style="--d:.35s">
+          <div class="ph" data-suggest="Portrait: Julie — urban working professional, mid-30s, on the go"><div class="cam">📷</div><div class="pl-txt">Julie · urban</div></div>
+          <div class="pname">Julie<b>urban professional</b></div>
+        </div>
+        <div class="pcard center r" style="--d:.5s">
+          <div class="ph" data-suggest="Portrait: Joy — semi-urban mother, warm, practical (the bridge persona, give it the strongest shot)"><div class="cam">📷</div><div class="pl-txt">Joy · the bridge</div></div>
+          <div class="pname">Joy<b>semi-urban mother</b></div>
+        </div>
+        <div class="pcard r" style="--d:.65s">
+          <div class="ph" data-suggest="Portrait: Anna — provincial / rural, rooted, running the home"><div class="cam">📷</div><div class="pl-txt">Anna · rural</div></div>
+          <div class="pname">Anna<b>rural / provincial</b></div>
+        </div>
+      </div>
+      <div class="bridge r" style="--d:.8s">→  When we speak to Joy, we speak to both.  ←</div>
+      <div class="stats">
+        <div class="stat r" style="--d:.95s"><div class="num" data-count="78" data-suffix="%">0</div><div class="lbl">earn ₱20k/mo or below — the families who <i>are</i> the brand</div></div>
+        <div class="stat r" style="--d:1.08s"><div class="num" data-count="7" data-suffix="%">0</div><div class="lbl">earn above ₱40k today — the headroom we unlock</div></div>
+        <div class="stat r" style="--d:1.21s"><div class="num" data-count="41" data-suffix="%">0</div><div class="lbl">shop in towns — Joy's home turf</div></div>
+      </div>
+      <div class="jolli r" style="--d:1.4s"><b>Same soul. Same price.</b> Made impossible not to love — top to bottom, the way Jollibee grew.</div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5 — THE PLAN ============ -->
+  <section class="slide light" id="s5">
+    <div class="col">
+      <div class="eye r" style="--d:.05s">The Plan</div>
+      <h1 class="r" style="--d:.15s">The chassis & the engine.</h1>
+      <div class="cards">
+        <div class="card r" style="--d:.35s"><div class="top"></div><div class="badge">A</div>
+          <div class="role">The chassis</div><div class="ctitle">Brand Identity & Visual Refresh</div>
+          <div class="cmeta">6–8 weeks</div></div>
+        <div class="card r" style="--d:.5s"><div class="top"></div><div class="badge">B</div>
+          <div class="role">The operating manual</div><div class="ctitle">Guidelines & Regional Workshop</div>
+          <div class="cmeta">3–4 weeks</div></div>
+        <div class="card r" style="--d:.65s"><div class="top"></div><div class="badge">C</div>
+          <div class="role">The engine</div><div class="ctitle">Social & Content — from Day 1</div>
+          <div class="cmeta">6-month retainer</div></div>
+      </div>
+      <div class="tagline r" style="--d:.85s"><b>The engine runs</b> while we build the chassis underneath.</div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6 — ROADMAP ============ -->
+  <section class="slide light" id="s6">
+    <div class="col">
+      <div class="eye r" style="--d:.05s">The Roadmap</div>
+      <h1 class="r" style="--d:.15s">June → November 2026.</h1>
+      <div class="tl">
+        <div class="months r" style="--d:.3s"><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span></div>
+        <div class="track" id="track">
+          <div class="kick"></div>
+        </div>
+        <div class="note r" style="--d:.4s"><b>The engine starts Day 1.</b> Social runs the entire time — momentum in month one, a seamless visual handover, and a two-week buffer so nothing ever goes dark.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 7 — SUCCESS & THE ASK ============ -->
+  <section class="slide on-dark" id="s7">
+    <div class="col">
+      <div class="eye r" style="--d:.05s">Success · The Ask</div>
+      <h1 class="r" style="--d:.15s">What success looks like — and what we ask.</h1>
+      <div class="kpis">
+        <div class="kpi r" style="--d:.35s"><div class="num" data-count="100" data-suffix="%">0</div><div class="lbl">on-time delivery of every core visual asset</div></div>
+        <div class="kpi r" style="--d:.5s"><div class="num" data-count="25" data-prefix="+" data-suffix="%">0</div><div class="lbl">monthly organic reach (target 20–25%)</div></div>
+        <div class="kpi r" style="--d:.65s"><div class="num" data-count="20" data-prefix="+" data-suffix="%">0</div><div class="lbl">organic engagement (target 15–20%)</div></div>
+      </div>
+      <div class="asks">
+        <div class="ask r" style="--d:.85s"><div class="n">1</div><div class="t">Align on the direction.</div></div>
+        <div class="ask r" style="--d:.97s"><div class="n">2</div><div class="t">Name one point of contact.</div></div>
+        <div class="ask r" style="--d:1.09s"><div class="n">3</div><div class="t">Sign to lock June 1.</div></div>
+      </div>
+      <div class="close r" style="--d:1.3s">You bake it. We'll help them remember why they love it.</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<button class="nav-arrow" id="prevBtn">‹</button>
+<button class="nav-arrow" id="nextBtn">›</button>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const dotsWrap=document.getElementById('dots');
+const bar=document.getElementById('bar');
+let idx=0;
+
+(function buildTimeline(){
+  const track=document.getElementById('track');
+  const cols=6, axisLeft=14;
+  const axisW=100-axisLeft;
+  const colW=axisW/cols;
+  for(let i=0;i<=cols;i++){const g=document.createElement('div');g.className='gl';g.style.left=(axisLeft+i*colW)+'%';track.appendChild(g);}
+  const kick=track.querySelector('.kick');if(kick)kick.style.left=axisLeft+'%';
+  const rows=[
+    {lab:'Identity',sub:'WS A · weeks 2–8',start:0.15,span:1.85,c:'var(--red)',y:6,tag:'WS A'},
+    {lab:'Guidelines',sub:'WS B · weeks 8–12',start:2.0,span:1.1,c:'var(--yellow)',y:38,tag:'WS B'},
+    {lab:'Social',sub:'WS C · months 1–6',start:0.05,span:5.9,c:'var(--orange)',y:70,tag:'WS C'}
+  ];
+  rows.forEach((r,i)=>{
+    const lab=document.createElement('div');lab.className='lab';lab.style.top=(r.y-1)+'%';
+    lab.innerHTML=r.lab+'<small>'+r.sub+'</small>';track.appendChild(lab);
+    const b=document.createElement('div');b.className='tlbar';
+    b.style.left=(axisLeft+r.start*colW)+'%';
+    b.style.width=(r.span*colW)+'%';
+    b.style.top=r.y+'%';b.style.background=r.c;
+    b.style.transitionDelay=(0.45+i*0.18)+'s';
+    b.innerHTML='<b>'+r.tag+'</b>';
+    track.appendChild(b);
+  });
+})();
+
+slides.forEach((s,i)=>{const b=document.createElement('button');b.onclick=()=>go(i);dotsWrap.appendChild(b);});
+const dots=[...dotsWrap.children];
+
+function animateCounts(slide){
+  slide.querySelectorAll('[data-count]').forEach(el=>{
+    const to=+el.dataset.count, pre=el.dataset.prefix||'', suf=el.dataset.suffix||'';
+    const dur=1100, t0=performance.now();
+    function fmt(n){return pre+Math.round(n).toLocaleString('en-US')+suf;}
+    function step(t){const p=Math.min((t-t0)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=fmt(to*e);if(p<1)requestAnimationFrame(step);}
+    el.textContent=fmt(0);requestAnimationFrame(step);
+  });
+}
+
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>{s.classList.remove('active','past');if(i<n)s.classList.add('past');});
+  idx=n;
+  const cur=slides[idx];cur.classList.add('active');
+  dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+  bar.style.width=((idx+1)/slides.length*100)+'%';
+  document.body.classList.toggle('on-dark-nav',cur.classList.contains('on-dark'));
+  setTimeout(()=>animateCounts(cur),250);
+}
+
+function next(){go(idx+1)} function prev(){go(idx-1)}
+document.getElementById('nextBtn').onclick=next;
+document.getElementById('prevBtn').onclick=prev;
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev();}
+  if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+});
+document.getElementById('fsBtn').onclick=()=>{
+  if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();
+};
+let sx=0;addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)dx<0?next():prev();},{passive:true});
+
+go(0);
+</script>
